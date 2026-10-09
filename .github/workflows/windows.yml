@@ -62,8 +62,9 @@ jobs:
           $instalador = (Get-ChildItem deploy\windows\dist\PuSelfhost-Setup-*.exe).FullName
           Write-Host "Instalador: $instalador ($([math]::Round((Get-Item $instalador).Length / 1MB)) MB)"
           Start-Process $instalador -ArgumentList '/S' -Wait
-          $app = "$env:LOCALAPPDATA\Programs\PuSelfhost\PuSelfhost.exe"
-          if (-not (Test-Path $app)) { throw "No quedó instalado en $app" }
+          $app = (Get-ChildItem "$env:LOCALAPPDATA\Programs" -Recurse -Depth 2 -Filter PuSelfhost.exe -ErrorAction SilentlyContinue | Select-Object -First 1).FullName
+          if (-not $app) { Get-ChildItem "$env:LOCALAPPDATA\Programs" -ErrorAction SilentlyContinue; throw 'No quedó instalado PuSelfhost.exe' }
+          Write-Host "Instalado en $app"
           $estado = "$env:APPDATA\PuSelfhost\estado.json"
 
           function Iniciar {
