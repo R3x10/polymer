@@ -45,7 +45,7 @@ jobs:
         run: |
           docker exec lxc sha256sum /etc/puselfhost/puselfhost.env > antes.txt
           docker exec lxc puselfhost-actualizar
-          docker exec lxc sha256sum -c - < antes.txt
+          docker exec -i lxc sha256sum -c - < antes.txt
           curl -fsS -X POST http://localhost:8080/api/auth/login -H 'Content-Type: application/json' \
             -d '{"email":"admin@example.com","password":"clave-de-ci-123"}' | grep -q '"token"'
       - name: Los servicios arrancan solos tras reiniciar
