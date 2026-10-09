@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>PuSelfhost</title>
+    <style>
+      body { margin: 0; height: 100vh; display: grid; place-items: center; font-family: 'Segoe UI', system-ui, sans-serif; background: #f5f6f8; color: #1f2937; }
+      .caja { text-align: center; }
+      h1 { font-size: 28px; font-weight: 600; margin: 0 0 12px; }
+      p { margin: 0; color: #4b5563; }
+      .giro { width: 32px; height: 32px; margin: 24px auto 0; border: 3px solid #d1d5db; border-top-color: #2563eb; border-radius: 50%; animation: g 0.9s linear infinite; }
+      @keyframes g { to { transform: rotate(360deg); } }
+    </style>
+  </head>
+  <body>
+    <div class="caja">
+      <h1>PuSelfhost</h1>
+      <p id="aviso">Iniciando…</p>
+      <div class="giro"></div>
+    </div>
+    <script>
+      window.aviso = (msg) => (document.getElementById('aviso').textContent = msg);
+    </script>
+  </body>
+</html>

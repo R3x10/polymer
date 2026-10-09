@@ -1,0 +1,126 @@
+name: Windows
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+env:
+  # PostgreSQL portátil para Windows (binarios de EnterpriseDB reempaquetados por zonky).
+  PG_VERSION: 16.15.0
+  PG_SHA256: 51c7812dc1af47c9a2ccb64fe74efb88c515cff2da347ce72aab92b4cc8e1191
+
+jobs:
+  instalador:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Compilar la API y la web
+        run: node deploy/windows/preparar.mjs
+
+      - name: Descargar PostgreSQL portátil
+        run: |
+          $url = "https://repo1.maven.org/maven2/io/zonky/test/postgres/embedded-postgres-binaries-windows-amd64/$env:PG_VERSION/embedded-postgres-binaries-windows-amd64-$env:PG_VERSION.jar"
+          Invoke-WebRequest $url -OutFile pg.zip
+          $hash = (Get-FileHash pg.zip -Algorithm SHA256).Hash
+          if ($hash -ne $env:PG_SHA256) { throw "Hash inesperado de PostgreSQL: $hash" }
+          Expand-Archive pg.zip -DestinationPath pg
+          7z x pg\postgres-windows-x86_64.txz -opg | Out-Null
+          $destino = 'deploy\windows\recursos\postgres'
+          7z x pg\postgres-windows-x86_64.tar "-o$destino" | Out-Null
+          # Bibliotecas de pgAdmin que no se usan.
+          Remove-Item "$destino\bin\wx*.dll", "$destino\bin\testplug.dll" -ErrorAction SilentlyContinue
+          # Runtime de Visual C++ junto a PostgreSQL, por si el equipo no lo tiene instalado.
+          foreach ($dll in 'vcruntime140.dll', 'vcruntime140_1.dll', 'msvcp140.dll') {
+            Copy-Item "$env:WINDIR\System32\$dll" "$destino\bin\"
+          }
+          & "$destino\bin\postgres.exe" --version
+
+      - name: Empaquetar el instalador
+        working-directory: deploy/windows
+        run: |
+          npm ci
+          npx electron-builder --win nsis --publish never
+
+      - name: Instalar y probar
+        run: |
+          $instalador = (Get-ChildItem deploy\windows\dist\PuSelfhost-Setup-*.exe).FullName
+          Write-Host "Instalador: $instalador ($([math]::Round((Get-Item $instalador).Length / 1MB)) MB)"
+          Start-Process $instalador -ArgumentList '/S' -Wait
+          $app = (Get-ChildItem "$env:LOCALAPPDATA\Programs" -Recurse -Depth 2 -Filter PuSelfhost.exe -ErrorAction SilentlyContinue | Select-Object -First 1).FullName
+          if (-not $app) { Get-ChildItem "$env:LOCALAPPDATA\Programs" -ErrorAction SilentlyContinue; throw 'No quedó instalado PuSelfhost.exe' }
+          Write-Host "Instalado en $app"
+          $estado = "$env:APPDATA\PuSelfhost\estado.json"
+
+          function Iniciar {
+            Remove-Item $estado -ErrorAction SilentlyContinue
+            Start-Process $app -ArgumentList '--sin-ventana'
+            for ($i = 0; $i -lt 180 -and -not (Test-Path $estado); $i++) { Start-Sleep 1 }
+            if (-not (Test-Path $estado)) { throw 'La app no terminó de arrancar' }
+            $e = Get-Content $estado | ConvertFrom-Json
+            if ($e.error) { throw "La app no arrancó: $($e.error)" }
+            return $e.url
+          }
+
+          function Probar($url) {
+            Invoke-RestMethod "$url/api/salud" | Out-Null
+            if ((Invoke-WebRequest "$url/presupuestos" -UseBasicParsing).Content -notmatch '<div id="root">') { throw 'No se sirvió la interfaz' }
+            $cuerpo = @{ email = 'admin@example.com'; password = 'cambia-esta-contrasena' } | ConvertTo-Json
+            $sesion = Invoke-RestMethod "$url/api/auth/login" -Method Post -ContentType 'application/json' -Body $cuerpo
+            if (-not $sesion.token) { throw 'No se pudo iniciar sesión' }
+            Write-Host "OK en $url"
+          }
+
+          function Detener {
+            Start-Process $app -ArgumentList '--detener' -Wait
+            for ($i = 0; $i -lt 60 -and (Get-Process PuSelfhost -ErrorAction SilentlyContinue); $i++) { Start-Sleep 1 }
+            if (Get-Process PuSelfhost -ErrorAction SilentlyContinue) { throw 'La app no se cerró' }
+            if (Get-Process postgres -ErrorAction SilentlyContinue) { throw 'PostgreSQL siguió corriendo al cerrar' }
+          }
+
+          # Primer arranque (crea la base) y segundo arranque (la reutiliza).
+          Probar (Iniciar)
+          Detener
+          Probar (Iniciar)
+          Detener
+
+      - name: Bitácoras en caso de falla
+        if: failure()
+        run: Get-ChildItem "$env:APPDATA\PuSelfhost\registros" -ErrorAction SilentlyContinue | ForEach-Object { Write-Host "== $($_.Name)"; Get-Content $_.FullName -Tail 80 }
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PuSelfhost-Windows
+          path: deploy/windows/dist/PuSelfhost-Setup-*.exe
+          if-no-files-found: error
+
+      - name: Publicar descarga
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $instalador = (Get-ChildItem deploy\windows\dist\PuSelfhost-Setup-*.exe).FullName
+          if ($env:GITHUB_REF_TYPE -eq 'tag') {
+            gh release create $env:GITHUB_REF_NAME $instalador --title "PuSelfhost $env:GITHUB_REF_NAME" --generate-notes
+          } else {
+            # La versión más reciente de main siempre en la misma página de descarga.
+            gh release delete windows-ultima --cleanup-tag --yes 2>$null
+            gh release create windows-ultima $instalador --prerelease --target $env:GITHUB_SHA `
+              --title 'PuSelfhost para Windows (última de main)' `
+              --notes "Instalador generado desde $env:GITHUB_SHA. Usuario inicial: admin@example.com / cambia-esta-contrasena."
+          }

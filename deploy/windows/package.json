@@ -1,0 +1,32 @@
+{
+  "name": "puselfhost-escritorio",
+  "productName": "PuSelfhost",
+  "version": "0.1.0",
+  "description": "PuSelfhost para Windows: precios unitarios y presupuestos de obra en una sola instalación.",
+  "author": "PuSelfhost",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "preparar": "node preparar.mjs",
+    "empaquetar": "electron-builder --win nsis --publish never"
+  },
+  "devDependencies": {
+    "electron": "43.7.5",
+    "electron-builder": "26.16.1"
+  },
+  "build": {
+    "appId": "mx.puselfhost.escritorio",
+    "productName": "PuSelfhost",
+    "artifactName": "PuSelfhost-Setup-${version}.${ext}",
+    "files": ["main.js", "servicios.js", "cargando.html", "package.json"],
+    "extraResources": [{ "from": "recursos", "to": ".", "filter": ["**/*"] }],
+    "directories": { "output": "dist" },
+    "win": { "target": "nsis" },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "shortcutName": "PuSelfhost",
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}
