@@ -1,0 +1,16 @@
+{
+  "name": "puselfhost",
+  "private": true,
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "test:e2e": "pnpm --filter @puselfhost/api test:e2e",
+    "dev:api": "pnpm --filter @puselfhost/api dev",
+    "dev:web": "pnpm --filter @puselfhost/web dev"
+  }
+}

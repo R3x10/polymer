@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: pu
+          POSTGRES_PASSWORD: pu
+          POSTGRES_DB: pu_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U pu" --health-interval 5s --health-timeout 3s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm test:e2e
+        env:
+          DATABASE_URL: postgres://pu:pu@localhost:5432/pu_test
+      - run: pnpm build
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Levantar el sistema completo con Docker Compose
+        run: |
+          cp .env.example .env
+          sed -i 's/cambia-este-secreto/secreto-de-ci-0123456789abcdef/' .env
+          docker compose up -d --build --wait
+      - name: Probar inicio de sesión a través del proxy web
+        run: |
+          curl -fsS http://localhost:8080/api/salud
+          curl -fsS http://localhost:8080/ | grep -q '<div id="root">'
+          curl -fsS -X POST http://localhost:8080/api/auth/login \
+            -H 'Content-Type: application/json' \
+            -d '{"email":"admin@example.com","password":"cambia-esta-contrasena"}' | grep -q '"token"'
+      - name: Bitácora en caso de falla
+        if: failure()
+        run: docker compose logs
