@@ -1,0 +1,58 @@
+name: Instalación en Proxmox LXC
+
+on:
+  push:
+    branches: [main]
+    paths: ["deploy/proxmox/**", ".github/workflows/proxmox-lxc.yml"]
+  pull_request:
+
+jobs:
+  scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: shellcheck deploy/proxmox/*.sh deploy/proxmox/test/*.sh
+      - name: Script del nodo Proxmox con pct/pveam simulados
+        run: sudo bash deploy/proxmox/test/prueba-host.sh
+
+  instalador-debian:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Contenedor Debian 12 con systemd (como el LXC)
+        run: |
+          printf 'FROM debian:12\nRUN apt-get update -qq && apt-get install -y -qq systemd systemd-sysv >/dev/null\nCMD ["/sbin/init"]\n' > Dockerfile
+          docker build -q -t debian12-systemd .
+          docker run -d --name lxc --privileged --cgroupns=host \
+            -v /sys/fs/cgroup:/sys/fs/cgroup:rw -p 8080:80 debian12-systemd
+          docker exec lxc systemctl is-system-running --wait || true
+      - uses: actions/checkout@v4
+        with:
+          path: src
+      - name: Instalar
+        run: |
+          docker cp src/deploy/proxmox/install.sh lxc:/root/puselfhost-install.sh
+          docker exec -e PU_REPO=https://github.com/${{ github.repository }}.git \
+            -e PU_REF=${{ github.head_ref || github.ref_name }} \
+            -e ADMIN_EMAIL=admin@example.com -e ADMIN_PASSWORD=clave-de-ci-123 \
+            lxc bash /root/puselfhost-install.sh
+      - name: Probar la web y el inicio de sesión
+        run: |
+          curl -fsS http://localhost:8080/api/salud
+          curl -fsS http://localhost:8080/ | grep -q '<div id="root">'
+          curl -fsS -X POST http://localhost:8080/api/auth/login -H 'Content-Type: application/json' \
+            -d '{"email":"admin@example.com","password":"clave-de-ci-123"}' | grep -q '"token"'
+      - name: Actualizar (volver a correr) conserva datos y secretos
+        run: |
+          docker exec lxc sha256sum /etc/puselfhost/puselfhost.env > antes.txt
+          docker exec lxc puselfhost-actualizar
+          docker exec lxc sha256sum -c - < antes.txt
+          curl -fsS -X POST http://localhost:8080/api/auth/login -H 'Content-Type: application/json' \
+            -d '{"email":"admin@example.com","password":"clave-de-ci-123"}' | grep -q '"token"'
+      - name: Los servicios arrancan solos tras reiniciar
+        run: |
+          docker restart lxc
+          for i in $(seq 1 30); do curl -fsS http://localhost:8080/api/salud && exit 0; sleep 2; done
+          exit 1
+      - name: Bitácora en caso de falla
+        if: failure()
+        run: docker exec lxc journalctl -u puselfhost-api -u caddy -n 100 --no-pager || true
