@@ -1,0 +1,4557 @@
+{
+ "fuente": "Neodata, archivo de intercambio de la obra OPUS27 (precios al 2026-09-07), partida 05 completa. Sin descripciones.",
+ "catalogo": {
+  "monedaBase": "MXN",
+  "insumos": [
+   {
+    "clave": "AACE-0036",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "223.25"
+    }
+   },
+   {
+    "clave": "AACE-0069",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "20.9"
+    }
+   },
+   {
+    "clave": "AACE-0255",
+    "tipo": "material",
+    "unidad": "roll",
+    "costo": {
+     "MXN": "16.8"
+    }
+   },
+   {
+    "clave": "AACE-0256",
+    "tipo": "material",
+    "unidad": "roll",
+    "costo": {
+     "MXN": "24.1"
+    }
+   },
+   {
+    "clave": "AACE-0257",
+    "tipo": "material",
+    "unidad": "roll",
+    "costo": {
+     "MXN": "36"
+    }
+   },
+   {
+    "clave": "ACCH-001",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "18.24"
+    }
+   },
+   {
+    "clave": "ACCH-002",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "17.28"
+    }
+   },
+   {
+    "clave": "ACCH-003",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "17.28"
+    }
+   },
+   {
+    "clave": "ACCH-004",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "22.52"
+    }
+   },
+   {
+    "clave": "ACCH-005",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "17.28"
+    }
+   },
+   {
+    "clave": "ACEEST-004",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "22.56"
+    }
+   },
+   {
+    "clave": "ACEL-002",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "17.51"
+    }
+   },
+   {
+    "clave": "ACEL-005",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "17.14"
+    }
+   },
+   {
+    "clave": "ACEL-006",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "17.14"
+    }
+   },
+   {
+    "clave": "ACEL-007",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "13.28"
+    }
+   },
+   {
+    "clave": "ACEL-009",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "13.28"
+    }
+   },
+   {
+    "clave": "ACEL-010",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "13.28"
+    }
+   },
+   {
+    "clave": "ACES-001",
+    "tipo": "material",
+    "unidad": "m2",
+    "costo": {
+     "MXN": "13.29"
+    }
+   },
+   {
+    "clave": "ACES-002",
+    "tipo": "material",
+    "unidad": "m2",
+    "costo": {
+     "MXN": "20.78"
+    }
+   },
+   {
+    "clave": "ACES-003",
+    "tipo": "material",
+    "unidad": "m2",
+    "costo": {
+     "MXN": "24.83"
+    }
+   },
+   {
+    "clave": "ACES-004",
+    "tipo": "material",
+    "unidad": "m2",
+    "costo": {
+     "MXN": "35.33"
+    }
+   },
+   {
+    "clave": "AGLU-002",
+    "tipo": "material",
+    "unidad": "ton",
+    "costo": {
+     "MXN": "4655"
+    }
+   },
+   {
+    "clave": "AGRE-001",
+    "tipo": "material",
+    "unidad": "camion",
+    "costo": {
+     "MXN": "2995"
+    }
+   },
+   {
+    "clave": "AGRE-002",
+    "tipo": "material",
+    "unidad": "camión",
+    "costo": {
+     "MXN": "3.06E+3"
+    }
+   },
+   {
+    "clave": "AGRE-013",
+    "tipo": "material",
+    "unidad": "m3",
+    "costo": {
+     "MXN": "1455.94"
+    }
+   },
+   {
+    "clave": "AGRE-016",
+    "tipo": "material",
+    "unidad": "m3",
+    "costo": {
+     "MXN": "203.55"
+    }
+   },
+   {
+    "clave": "AMAIN-001",
+    "tipo": "equipo",
+    "unidad": "hora",
+    "costo": {
+     "MXN": "148.46"
+    }
+   },
+   {
+    "clave": "AMAIN-021",
+    "tipo": "equipo",
+    "unidad": "hora",
+    "costo": {
+     "MXN": "215.78"
+    }
+   },
+   {
+    "clave": "AMALI-017",
+    "tipo": "equipo",
+    "unidad": "hora",
+    "costo": {
+     "MXN": "178.83"
+    }
+   },
+   {
+    "clave": "AMAPE-265",
+    "tipo": "equipo",
+    "unidad": "hora",
+    "costo": {
+     "MXN": "8.21"
+    }
+   },
+   {
+    "clave": "CAMI-500",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "1302.71"
+    }
+   },
+   {
+    "clave": "CAMI-501",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "1454.84"
+    }
+   },
+   {
+    "clave": "CAMI-502",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "1609.1"
+    }
+   },
+   {
+    "clave": "CMC-00006",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "8.63"
+    }
+   },
+   {
+    "clave": "CMC-00019",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "16.02"
+    }
+   },
+   {
+    "clave": "CMC-35060",
+    "tipo": "material",
+    "unidad": "ton",
+    "costo": {
+     "MXN": "1.728E+4"
+    }
+   },
+   {
+    "clave": "CMC-39590",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "22.29"
+    }
+   },
+   {
+    "clave": "COMB-006",
+    "tipo": "material",
+    "unidad": "LT",
+    "costo": {
+     "MXN": "24.83"
+    }
+   },
+   {
+    "clave": "CRUZA-002",
+    "tipo": "material",
+    "unidad": "m3",
+    "costo": {
+     "MXN": "2239.44"
+    }
+   },
+   {
+    "clave": "CRUZA-019",
+    "tipo": "material",
+    "unidad": "m3",
+    "costo": {
+     "MXN": "2557.5"
+    }
+   },
+   {
+    "clave": "CRUZA-025",
+    "tipo": "material",
+    "unidad": "m3",
+    "costo": {
+     "MXN": "1760.54"
+    }
+   },
+   {
+    "clave": "CRUZA-026",
+    "tipo": "material",
+    "unidad": "m3",
+    "costo": {
+     "MXN": "1872.41"
+    }
+   },
+   {
+    "clave": "CRUZA-032",
+    "tipo": "material",
+    "unidad": "m3",
+    "costo": {
+     "MXN": "1908"
+    }
+   },
+   {
+    "clave": "CRUZA-041",
+    "tipo": "material",
+    "unidad": "m3",
+    "costo": {
+     "MXN": "2108.58"
+    }
+   },
+   {
+    "clave": "CRUZA-057",
+    "tipo": "material",
+    "unidad": "m3",
+    "costo": {
+     "MXN": "245.33"
+    }
+   },
+   {
+    "clave": "CRUZA-059",
+    "tipo": "material",
+    "unidad": "m3",
+    "costo": {
+     "MXN": "290.32"
+    }
+   },
+   {
+    "clave": "CRUZA-062",
+    "tipo": "material",
+    "unidad": "m3",
+    "costo": {
+     "MXN": "374.96"
+    }
+   },
+   {
+    "clave": "FACHEME",
+    "tipo": "equipo",
+    "unidad": "(%)mo",
+    "porcentajeDeManoDeObra": true
+   },
+   {
+    "clave": "HESEG-001",
+    "tipo": "equipo",
+    "unidad": "(%)mo",
+    "porcentajeDeManoDeObra": true
+   },
+   {
+    "clave": "MACI-001",
+    "tipo": "material",
+    "unidad": "pt",
+    "costo": {
+     "MXN": "106.02"
+    }
+   },
+   {
+    "clave": "MACI-002",
+    "tipo": "material",
+    "unidad": "m2",
+    "costo": {
+     "MXN": "132.43"
+    }
+   },
+   {
+    "clave": "MACI-003",
+    "tipo": "material",
+    "unidad": "pt",
+    "costo": {
+     "MXN": "8.92"
+    }
+   },
+   {
+    "clave": "MACI-006",
+    "tipo": "material",
+    "unidad": "pt",
+    "costo": {
+     "MXN": "16.25"
+    }
+   },
+   {
+    "clave": "MACI-009",
+    "tipo": "material",
+    "unidad": "pt",
+    "costo": {
+     "MXN": "23.01"
+    }
+   },
+   {
+    "clave": "MAII-001",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "284.97"
+    }
+   },
+   {
+    "clave": "MAPW-001",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "370.67"
+    }
+   },
+   {
+    "clave": "MAPW-007",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "322.68"
+    }
+   },
+   {
+    "clave": "MAPW-023",
+    "tipo": "material",
+    "unidad": "tira",
+    "costo": {
+     "MXN": "16.61"
+    }
+   },
+   {
+    "clave": "MAPW-024",
+    "tipo": "material",
+    "unidad": "tira",
+    "costo": {
+     "MXN": "22.18"
+    }
+   },
+   {
+    "clave": "MOCA-001",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "costo": {
+     "MXN": "723.44"
+    }
+   },
+   {
+    "clave": "MOCA-002",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "costo": {
+     "MXN": "779.53"
+    }
+   },
+   {
+    "clave": "MOCA-008",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "costo": {
+     "MXN": "768.58"
+    }
+   },
+   {
+    "clave": "MOCA-013",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "costo": {
+     "MXN": "1291.64"
+    }
+   },
+   {
+    "clave": "MOCA-014",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "costo": {
+     "MXN": "1192.44"
+    }
+   },
+   {
+    "clave": "MOCA-018",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "costo": {
+     "MXN": "1258.56"
+    }
+   },
+   {
+    "clave": "MOCA-021",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "costo": {
+     "MXN": "1170.39"
+    }
+   },
+   {
+    "clave": "MOCA-027",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "costo": {
+     "MXN": "1225.5"
+    }
+   },
+   {
+    "clave": "MOCA-033",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "costo": {
+     "MXN": "1390.82"
+    }
+   },
+   {
+    "clave": "ROCA-089",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "148.45"
+    }
+   },
+   {
+    "clave": "ROCA-094",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "182.34"
+    }
+   },
+   {
+    "clave": "ROCA-104",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "303.14"
+    }
+   },
+   {
+    "clave": "ROCA-109",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "498.78"
+    }
+   },
+   {
+    "clave": "ROCA-114",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "509.96"
+    }
+   },
+   {
+    "clave": "ROCA-205",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "11.07"
+    }
+   },
+   {
+    "clave": "ROCA-208",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "10.34"
+    }
+   },
+   {
+    "clave": "ROCA-209",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "8.95"
+    }
+   },
+   {
+    "clave": "SOLD-004",
+    "tipo": "material",
+    "unidad": "kg",
+    "costo": {
+     "MXN": "163.98"
+    }
+   },
+   {
+    "clave": "TRY-001",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "53.46"
+    }
+   },
+   {
+    "clave": "TRY-003",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "49.62"
+    }
+   },
+   {
+    "clave": "TRY-004",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "27.85"
+    }
+   },
+   {
+    "clave": "TRY-022",
+    "tipo": "material",
+    "unidad": "PZA",
+    "costo": {
+     "MXN": "126.48"
+    }
+   }
+  ],
+  "matrices": [
+   {
+    "clave": "020414",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.02145"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.020408"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "ACES-001",
+      "cantidad": "1.1"
+     }
+    ]
+   },
+   {
+    "clave": "040113",
+    "tipo": "concepto",
+    "unidad": "ton",
+    "renglones": [
+     {
+      "componente": "MOCU-001",
+      "cantidad": "0.33333"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050101",
+    "tipo": "concepto",
+    "unidad": "kg",
+    "renglones": [
+     {
+      "componente": "ACCH-001",
+      "cantidad": "1.02"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.01"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.105"
+     },
+     {
+      "componente": "040113",
+      "cantidad": "0.001"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050102",
+    "tipo": "concepto",
+    "unidad": "kg",
+    "renglones": [
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.007353"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "1.02"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.06"
+     },
+     {
+      "componente": "040113",
+      "cantidad": "0.001"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050103",
+    "tipo": "concepto",
+    "unidad": "kg",
+    "renglones": [
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.006667"
+     },
+     {
+      "componente": "ACCH-003",
+      "cantidad": "1.02"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "040113",
+      "cantidad": "0.001"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050104",
+    "tipo": "concepto",
+    "unidad": "kg",
+    "renglones": [
+     {
+      "componente": "ACCH-004",
+      "cantidad": "1.02"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.005556"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "040113",
+      "cantidad": "0.001"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050105",
+    "tipo": "concepto",
+    "unidad": "kg",
+    "renglones": [
+     {
+      "componente": "ACCH-005",
+      "cantidad": "1.02"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.005263"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050109",
+    "tipo": "concepto",
+    "unidad": "ton",
+    "renglones": [
+     {
+      "componente": "ACCH-001",
+      "cantidad": "1.02E+3"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "1E+1"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "105"
+     },
+     {
+      "componente": "040113",
+      "cantidad": "1"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050110",
+    "tipo": "concepto",
+    "unidad": "ton",
+    "renglones": [
+     {
+      "componente": "MOCU-004",
+      "cantidad": "7.352941"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "1.02E+3"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "6E+1"
+     },
+     {
+      "componente": "040113",
+      "cantidad": "1"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050111",
+    "tipo": "concepto",
+    "unidad": "ton",
+    "renglones": [
+     {
+      "componente": "MOCU-004",
+      "cantidad": "6.666667"
+     },
+     {
+      "componente": "ACCH-003",
+      "cantidad": "1.02E+3"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "25"
+     },
+     {
+      "componente": "040113",
+      "cantidad": "1"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050112",
+    "tipo": "concepto",
+    "unidad": "ton",
+    "renglones": [
+     {
+      "componente": "ACCH-004",
+      "cantidad": "1.02E+3"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "5.555556"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "25"
+     },
+     {
+      "componente": "040113",
+      "cantidad": "1"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050113",
+    "tipo": "concepto",
+    "unidad": "ton",
+    "renglones": [
+     {
+      "componente": "ACCH-005",
+      "cantidad": "1.02E+3"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "5.263158"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "2E+1"
+     },
+     {
+      "componente": "040113",
+      "cantidad": "1"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050201",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.01"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.008333"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "0.103299"
+     },
+     {
+      "componente": "MAII-001",
+      "cantidad": "0.095087"
+     },
+     {
+      "componente": "CMC-00006",
+      "cantidad": "0.283333"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.697"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.113333"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.113333"
+     },
+     {
+      "componente": "ACEL-005",
+      "cantidad": "0.028333"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.10002"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.05001"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.088235"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.046976"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "8.455695"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.3485"
+     },
+     {
+      "componente": "PCON-009",
+      "cantidad": "0.10002"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050202",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.012"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.01"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "0.105729"
+     },
+     {
+      "componente": "MAII-001",
+      "cantidad": "0.097324"
+     },
+     {
+      "componente": "CMC-00006",
+      "cantidad": "0.29"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.7134"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.116"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.116"
+     },
+     {
+      "componente": "ACEL-005",
+      "cantidad": "0.029"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.120024"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.060012"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.086207"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.046976"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "8.455695"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.3567"
+     },
+     {
+      "componente": "PCON-009",
+      "cantidad": "0.120024"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050203",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.01"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.008333"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "0.103299"
+     },
+     {
+      "componente": "MAII-001",
+      "cantidad": "0.095087"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.697"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.113333"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.113333"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.10002"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.05001"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.098039"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.046976"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "8.455695"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.3485"
+     },
+     {
+      "componente": "PCON-013",
+      "cantidad": "0.10002"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050204",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.012"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.01"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "0.105729"
+     },
+     {
+      "componente": "MAII-001",
+      "cantidad": "0.097324"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.7134"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.116"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.116"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.120024"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.060012"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.095785"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.046976"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "8.455695"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.3567"
+     },
+     {
+      "componente": "PCON-013",
+      "cantidad": "0.120024"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050205",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.01"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.008333"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "0.103299"
+     },
+     {
+      "componente": "MAII-001",
+      "cantidad": "0.095087"
+     },
+     {
+      "componente": "CMC-00006",
+      "cantidad": "0.283333"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.697"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.113333"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.113333"
+     },
+     {
+      "componente": "ACEL-005",
+      "cantidad": "0.028333"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.10002"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.05001"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.088235"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.046976"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "8.455695"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.3485"
+     },
+     {
+      "componente": "PCON-013",
+      "cantidad": "0.10002"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050206",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.012"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "0.105729"
+     },
+     {
+      "componente": "MAII-001",
+      "cantidad": "0.097324"
+     },
+     {
+      "componente": "CMC-00006",
+      "cantidad": "0.29"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.7134"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.116"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.116"
+     },
+     {
+      "componente": "ACEL-005",
+      "cantidad": "0.029"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.120024"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.086207"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.046976"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "8.455695"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.3567"
+     },
+     {
+      "componente": "CRUZA-025",
+      "cantidad": "0.120024"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050207",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.01"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.016667"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "0.103299"
+     },
+     {
+      "componente": "MAII-001",
+      "cantidad": "0.095087"
+     },
+     {
+      "componente": "CMC-00006",
+      "cantidad": "0.283333"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.697"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.113333"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.113333"
+     },
+     {
+      "componente": "ACEL-005",
+      "cantidad": "0.028333"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.10002"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.088235"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.046976"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "8.455695"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.3485"
+     },
+     {
+      "componente": "CRUZA-026",
+      "cantidad": "0.10002"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050208",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.012"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "0.105729"
+     },
+     {
+      "componente": "MAII-001",
+      "cantidad": "0.097324"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.7134"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.116"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.116"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.120024"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.095785"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.046976"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "8.455695"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.3567"
+     },
+     {
+      "componente": "CRUZA-026",
+      "cantidad": "0.120024"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050209",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.015"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "0.109375"
+     },
+     {
+      "componente": "MAII-001",
+      "cantidad": "0.10068"
+     },
+     {
+      "componente": "CMC-00006",
+      "cantidad": "0.3"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.738"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.12"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.12"
+     },
+     {
+      "componente": "ACEL-005",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.15003"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.083333"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.046976"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "8.455695"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.369"
+     },
+     {
+      "componente": "CRUZA-032",
+      "cantidad": "0.15003"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050210",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.015"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "0.109375"
+     },
+     {
+      "componente": "MAII-001",
+      "cantidad": "0.10068"
+     },
+     {
+      "componente": "CMC-00006",
+      "cantidad": "0.3"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.738"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.12"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.12"
+     },
+     {
+      "componente": "ACEL-005",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.15003"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.083333"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.047992"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "7.925926"
+     },
+     {
+      "componente": "ACCH-003",
+      "cantidad": "0.71262"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.369"
+     },
+     {
+      "componente": "CRUZA-032",
+      "cantidad": "0.15003"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050301",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.026316"
+     },
+     {
+      "componente": "ACES-004",
+      "cantidad": "1.1"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050302",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "ACES-002",
+      "cantidad": "1.1"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.02145"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.041667"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050303",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "ACES-004",
+      "cantidad": "1.1"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.02145"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050304",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "ACES-003",
+      "cantidad": "1.1"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.02145"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.02381"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050305",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.02145"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.021739"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "ACES-001",
+      "cantidad": "1.1"
+     }
+    ]
+   },
+   {
+    "clave": "050401",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "PCIM-023",
+      "cantidad": "1"
+     },
+     {
+      "componente": "PAHC-017",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.167"
+     },
+     {
+      "componente": "MAPW-001",
+      "cantidad": "0.3359"
+     },
+     {
+      "componente": "MAPW-023",
+      "cantidad": "0.7835"
+     },
+     {
+      "componente": "CRUZA-002",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "MAPW-024",
+      "cantidad": "0.667"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.15"
+     },
+     {
+      "componente": "AGRE-013",
+      "cantidad": "0.002785"
+     },
+     {
+      "componente": "PMEZ-029",
+      "cantidad": "0.0375"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050402",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MAPW-007",
+      "cantidad": "0.3359"
+     },
+     {
+      "componente": "MAPW-023",
+      "cantidad": "0.7835"
+     },
+     {
+      "componente": "MAPW-024",
+      "cantidad": "0.667"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.15"
+     },
+     {
+      "componente": "AGRE-013",
+      "cantidad": "0.002785"
+     },
+     {
+      "componente": "PMEZ-029",
+      "cantidad": "0.0323"
+     },
+     {
+      "componente": "CRUZA-002",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "PCIM-023",
+      "cantidad": "1"
+     },
+     {
+      "componente": "PAHC-017",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.1667"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050403",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "CAMI-500",
+      "cantidad": "0.2411"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "020414",
+      "cantidad": "1.05"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "MOCU-002",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "PCON-011",
+      "cantidad": "0.05"
+     },
+     {
+      "componente": "MOCU-002",
+      "cantidad": "0.076923"
+     },
+     {
+      "componente": "PCIM-023",
+      "cantidad": "1"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050404",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "CAMI-501",
+      "cantidad": "0.2157"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "020414",
+      "cantidad": "1.05"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "MOCU-002",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "PCON-011",
+      "cantidad": "0.05"
+     },
+     {
+      "componente": "MOCU-002",
+      "cantidad": "0.076923"
+     },
+     {
+      "componente": "PCIM-023",
+      "cantidad": "1"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050405",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "CAMI-502",
+      "cantidad": "0.1951"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "020414",
+      "cantidad": "1.05"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "MOCU-002",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "PCON-011",
+      "cantidad": "0.05"
+     },
+     {
+      "componente": "MOCU-002",
+      "cantidad": "0.076923"
+     },
+     {
+      "componente": "PCIM-023",
+      "cantidad": "1"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050501",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "ACCH-001",
+      "cantidad": "4.002202"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.246"
+     },
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.024673"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.096049"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.492"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-009",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.049534"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.012139"
+     },
+     {
+      "componente": "CRUZA-025",
+      "cantidad": "0.192098"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "1.049052"
+     },
+     {
+      "componente": "ACCH-003",
+      "cantidad": "0.064261"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "4.763094"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.096049"
+     },
+     {
+      "componente": "AACE-0255",
+      "cantidad": "0.0107"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.086851"
+     },
+     {
+      "componente": "CRUZA-062",
+      "cantidad": "0.006904"
+     },
+     {
+      "componente": "CRUZA-059",
+      "cantidad": "0.006904"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050502",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "ACCH-001",
+      "cantidad": "4.148473"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.246"
+     },
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.023642"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.091451"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.492"
+     },
+     {
+      "componente": "ACEL-005",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-009",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.051127"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.013163"
+     },
+     {
+      "componente": "CRUZA-025",
+      "cantidad": "0.182903"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "0.321251"
+     },
+     {
+      "componente": "MAII-001",
+      "cantidad": "0.086224"
+     },
+     {
+      "componente": "CMC-00006",
+      "cantidad": "0.25"
+     },
+     {
+      "componente": "ACCH-003",
+      "cantidad": "0.066769"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "4.897779"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.091451"
+     },
+     {
+      "componente": "AACE-0255",
+      "cantidad": "0.0107"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.096075"
+     },
+     {
+      "componente": "CRUZA-062",
+      "cantidad": "0.00683"
+     },
+     {
+      "componente": "CRUZA-059",
+      "cantidad": "0.00683"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050503",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "ACCH-001",
+      "cantidad": "4.148473"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.246"
+     },
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.023642"
+     },
+     {
+      "componente": "MOCU-029",
+      "cantidad": "0.025408"
+     },
+     {
+      "componente": "AMAIN-021",
+      "cantidad": "0.859756"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.091451"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.492"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-009",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.051127"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.013163"
+     },
+     {
+      "componente": "PCON-009",
+      "cantidad": "0.182903"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "1.053703"
+     },
+     {
+      "componente": "ACCH-003",
+      "cantidad": "0.066769"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "4.897779"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.091451"
+     },
+     {
+      "componente": "AACE-0255",
+      "cantidad": "0.0107"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.086468"
+     },
+     {
+      "componente": "CRUZA-059",
+      "cantidad": "0.00683"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050504",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "ACCH-001",
+      "cantidad": "4.148473"
+     },
+     {
+      "componente": "PCON-013",
+      "cantidad": "0.182903"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.246"
+     },
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.023642"
+     },
+     {
+      "componente": "MOCU-029",
+      "cantidad": "0.025408"
+     },
+     {
+      "componente": "AMAIN-021",
+      "cantidad": "0.859756"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.091451"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.492"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-009",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.051127"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.013163"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "1.053703"
+     },
+     {
+      "componente": "ACCH-003",
+      "cantidad": "0.066769"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "4.897779"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.091451"
+     },
+     {
+      "componente": "AACE-0256",
+      "cantidad": "0.0107"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.086468"
+     },
+     {
+      "componente": "CRUZA-059",
+      "cantidad": "0.00683"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050505",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "ACCH-001",
+      "cantidad": "4.148473"
+     },
+     {
+      "componente": "TRY-001",
+      "cantidad": "0.246"
+     },
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.023642"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.091451"
+     },
+     {
+      "componente": "TRY-003",
+      "cantidad": "0.492"
+     },
+     {
+      "componente": "ACEL-005",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-009",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.051127"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.013163"
+     },
+     {
+      "componente": "TRY-022",
+      "cantidad": "0.321251"
+     },
+     {
+      "componente": "MAII-001",
+      "cantidad": "0.086224"
+     },
+     {
+      "componente": "CMC-00006",
+      "cantidad": "0.25"
+     },
+     {
+      "componente": "ACCH-003",
+      "cantidad": "0.066769"
+     },
+     {
+      "componente": "CRUZA-032",
+      "cantidad": "0.182903"
+     },
+     {
+      "componente": "ACCH-002",
+      "cantidad": "4.897779"
+     },
+     {
+      "componente": "AACE-0257",
+      "cantidad": "0.0107"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.091451"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.096075"
+     },
+     {
+      "componente": "CRUZA-057",
+      "cantidad": "0.00683"
+     },
+     {
+      "componente": "CRUZA-059",
+      "cantidad": "0.00683"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "050611",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "PCON-009",
+      "cantidad": "0.062871"
+     },
+     {
+      "componente": "AACE-0255",
+      "cantidad": "0.011"
+     },
+     {
+      "componente": "ROCA-205",
+      "cantidad": "1E+1"
+     },
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.083333"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.083333"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.012574"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.031436"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.015718"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "ROCA-114",
+      "cantidad": "0.314286"
+     },
+     {
+      "componente": "PCIM-021",
+      "cantidad": "1"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.1"
+     }
+    ]
+   },
+   {
+    "clave": "050612",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "PCON-009",
+      "cantidad": "0.062871"
+     },
+     {
+      "componente": "AACE-0256",
+      "cantidad": "0.011"
+     },
+     {
+      "componente": "ROCA-208",
+      "cantidad": "17"
+     },
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.083333"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.083333"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.012574"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.031436"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.015718"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "ROCA-089",
+      "cantidad": "0.57619"
+     },
+     {
+      "componente": "PCIM-021",
+      "cantidad": "1"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.1"
+     }
+    ]
+   },
+   {
+    "clave": "050613",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "PCON-009",
+      "cantidad": "0.062871"
+     },
+     {
+      "componente": "AACE-0255",
+      "cantidad": "0.011"
+     },
+     {
+      "componente": "ROCA-209",
+      "cantidad": "15"
+     },
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.083333"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.083333"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.012574"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.031436"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.015718"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "ROCA-094",
+      "cantidad": "0.493878"
+     },
+     {
+      "componente": "PCIM-021",
+      "cantidad": "1"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.1"
+     }
+    ]
+   },
+   {
+    "clave": "050614",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "PCON-009",
+      "cantidad": "0.062871"
+     },
+     {
+      "componente": "AACE-0256",
+      "cantidad": "0.011"
+     },
+     {
+      "componente": "ROCA-208",
+      "cantidad": "12"
+     },
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.083333"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.083333"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.012574"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.031436"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.015718"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "ROCA-104",
+      "cantidad": "0.384127"
+     },
+     {
+      "componente": "PCIM-021",
+      "cantidad": "1"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.1"
+     }
+    ]
+   },
+   {
+    "clave": "050615",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "PCON-010",
+      "cantidad": "0.062871"
+     },
+     {
+      "componente": "AACE-0255",
+      "cantidad": "0.011"
+     },
+     {
+      "componente": "ROCA-209",
+      "cantidad": "11"
+     },
+     {
+      "componente": "MOCU-005",
+      "cantidad": "0.083333"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.083333"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.012574"
+     },
+     {
+      "componente": "AMAIN-001",
+      "cantidad": "0.031436"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.015718"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "ROCA-109",
+      "cantidad": "0.345714"
+     },
+     {
+      "componente": "PCIM-021",
+      "cantidad": "1"
+     },
+     {
+      "componente": "ACEEST-004",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.1"
+     }
+    ]
+   },
+   {
+    "clave": "050703",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.08343"
+     },
+     {
+      "componente": "AMAPE-265",
+      "cantidad": "0.75"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "MOCU-029",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "MOCU-016",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "MOCU-008",
+      "cantidad": "0.033333"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.070003"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.033333"
+     },
+     {
+      "componente": "CMC-39590",
+      "cantidad": "0.092949"
+     },
+     {
+      "componente": "TRY-004",
+      "cantidad": "0.0265"
+     },
+     {
+      "componente": "MACI-009",
+      "cantidad": "1.31"
+     },
+     {
+      "componente": "CMC-00019",
+      "cantidad": "0.011"
+     },
+     {
+      "componente": "SOLD-004",
+      "cantidad": "0.212162"
+     },
+     {
+      "componente": "AACE-0036",
+      "cantidad": "0.182916"
+     },
+     {
+      "componente": "CRUZA-057",
+      "cantidad": "0.08343"
+     },
+     {
+      "componente": "CRUZA-025",
+      "cantidad": "0.08343"
+     },
+     {
+      "componente": "AACE-0069",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "AACE-0255",
+      "cantidad": "0.0106"
+     }
+    ]
+   },
+   {
+    "clave": "050704",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.08343"
+     },
+     {
+      "componente": "AMAPE-265",
+      "cantidad": "0.75"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "MOCU-029",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "MOCU-016",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "MOCU-008",
+      "cantidad": "0.033333"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.021819"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.033333"
+     },
+     {
+      "componente": "CMC-39590",
+      "cantidad": "0.023144"
+     },
+     {
+      "componente": "TRY-004",
+      "cantidad": "0.0265"
+     },
+     {
+      "componente": "MACI-009",
+      "cantidad": "1.31"
+     },
+     {
+      "componente": "CMC-00019",
+      "cantidad": "0.011"
+     },
+     {
+      "componente": "SOLD-004",
+      "cantidad": "0.212162"
+     },
+     {
+      "componente": "AACE-0036",
+      "cantidad": "0.182916"
+     },
+     {
+      "componente": "CRUZA-057",
+      "cantidad": "0.08343"
+     },
+     {
+      "componente": "CMC-35060",
+      "cantidad": "0.002629"
+     },
+     {
+      "componente": "CRUZA-041",
+      "cantidad": "0.08343"
+     },
+     {
+      "componente": "AACE-0069",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "AACE-0255",
+      "cantidad": "0.0106"
+     }
+    ]
+   },
+   {
+    "clave": "050705",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "CMC-39590",
+      "cantidad": "0.092949"
+     },
+     {
+      "componente": "TRY-004",
+      "cantidad": "0.0265"
+     },
+     {
+      "componente": "MACI-009",
+      "cantidad": "1.31"
+     },
+     {
+      "componente": "CMC-00019",
+      "cantidad": "0.011"
+     },
+     {
+      "componente": "SOLD-004",
+      "cantidad": "0.212162"
+     },
+     {
+      "componente": "MOCU-029",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "MOCU-016",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "AACE-0036",
+      "cantidad": "0.182916"
+     },
+     {
+      "componente": "MOCU-008",
+      "cantidad": "0.033333"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.070003"
+     },
+     {
+      "componente": "CRUZA-057",
+      "cantidad": "0.11433"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.045679"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.11433"
+     },
+     {
+      "componente": "CRUZA-025",
+      "cantidad": "0.11433"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "AACE-0069",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "AACE-0255",
+      "cantidad": "0.0106"
+     },
+     {
+      "componente": "AMAPE-265",
+      "cantidad": "0.75"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     }
+    ]
+   },
+   {
+    "clave": "050706",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "CMC-39590",
+      "cantidad": "0.092949"
+     },
+     {
+      "componente": "TRY-004",
+      "cantidad": "0.0265"
+     },
+     {
+      "componente": "MACI-009",
+      "cantidad": "1.31"
+     },
+     {
+      "componente": "CMC-00019",
+      "cantidad": "0.011"
+     },
+     {
+      "componente": "SOLD-004",
+      "cantidad": "0.212162"
+     },
+     {
+      "componente": "MOCU-029",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "MOCU-016",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "AACE-0036",
+      "cantidad": "0.182916"
+     },
+     {
+      "componente": "MOCU-008",
+      "cantidad": "0.033333"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.070003"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.053909"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.13493"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "CRUZA-019",
+      "cantidad": "0.13493"
+     },
+     {
+      "componente": "AACE-0069",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "AACE-0255",
+      "cantidad": "0.0106"
+     },
+     {
+      "componente": "AMAPE-265",
+      "cantidad": "0.75"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     }
+    ]
+   },
+   {
+    "clave": "050707",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "CMC-39590",
+      "cantidad": "0.092949"
+     },
+     {
+      "componente": "TRY-004",
+      "cantidad": "0.0265"
+     },
+     {
+      "componente": "MACI-009",
+      "cantidad": "1.31"
+     },
+     {
+      "componente": "CMC-00019",
+      "cantidad": "0.011"
+     },
+     {
+      "componente": "SOLD-004",
+      "cantidad": "0.212162"
+     },
+     {
+      "componente": "MOCU-029",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "MOCU-016",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "AACE-0036",
+      "cantidad": "0.182916"
+     },
+     {
+      "componente": "MOCU-008",
+      "cantidad": "0.033333"
+     },
+     {
+      "componente": "MOCU-004",
+      "cantidad": "0.070003"
+     },
+     {
+      "componente": "CRUZA-057",
+      "cantidad": "0.15553"
+     },
+     {
+      "componente": "MOCU-027",
+      "cantidad": "0.06214"
+     },
+     {
+      "componente": "AMALI-017",
+      "cantidad": "0.15553"
+     },
+     {
+      "componente": "CRUZA-041",
+      "cantidad": "0.15553"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     },
+     {
+      "componente": "AACE-0069",
+      "cantidad": "0.025"
+     },
+     {
+      "componente": "AACE-0255",
+      "cantidad": "0.0106"
+     },
+     {
+      "componente": "AMAPE-265",
+      "cantidad": "0.75"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     }
+    ]
+   },
+   {
+    "clave": "050801",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "COMB-006",
+      "cantidad": "0.5"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.111111"
+     },
+     {
+      "componente": "MACI-003",
+      "cantidad": "0.69034"
+     },
+     {
+      "componente": "MACI-001",
+      "cantidad": "1.43362"
+     },
+     {
+      "componente": "MACI-002",
+      "cantidad": "0.1375"
+     },
+     {
+      "componente": "MACI-009",
+      "cantidad": "1.01733"
+     },
+     {
+      "componente": "ACEL-009",
+      "cantidad": "0.02776"
+     },
+     {
+      "componente": "ACEL-010",
+      "cantidad": "0.02444"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "MOCU-001",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "renglones": [
+     {
+      "componente": "MOCA-001",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCA-013",
+      "cantidad": "0.1"
+     }
+    ]
+   },
+   {
+    "clave": "MOCU-002",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "renglones": [
+     {
+      "componente": "MOCA-014",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCA-001",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCA-013",
+      "cantidad": "0.1"
+     }
+    ]
+   },
+   {
+    "clave": "MOCU-003",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "renglones": [
+     {
+      "componente": "MOCA-018",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCA-002",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCA-013",
+      "cantidad": "0.1"
+     }
+    ]
+   },
+   {
+    "clave": "MOCU-004",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "renglones": [
+     {
+      "componente": "MOCA-027",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCA-002",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCA-013",
+      "cantidad": "0.1"
+     }
+    ]
+   },
+   {
+    "clave": "MOCU-005",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "renglones": [
+     {
+      "componente": "MOCA-014",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCA-013",
+      "cantidad": "0.1"
+     },
+     {
+      "componente": "MOCA-002",
+      "cantidad": "1"
+     }
+    ]
+   },
+   {
+    "clave": "MOCU-008",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "renglones": [
+     {
+      "componente": "MOCA-021",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCA-002",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCA-013",
+      "cantidad": "0.1"
+     }
+    ]
+   },
+   {
+    "clave": "MOCU-016",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "renglones": [
+     {
+      "componente": "MOCA-033",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCA-008",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCA-013",
+      "cantidad": "0.1"
+     }
+    ]
+   },
+   {
+    "clave": "MOCU-027",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "renglones": [
+     {
+      "componente": "MOCA-014",
+      "cantidad": "1"
+     },
+     {
+      "componente": "MOCA-001",
+      "cantidad": "5"
+     },
+     {
+      "componente": "MOCA-013",
+      "cantidad": "0.05"
+     }
+    ]
+   },
+   {
+    "clave": "MOCU-029",
+    "tipo": "mano_obra",
+    "unidad": "jor",
+    "renglones": [
+     {
+      "componente": "MOCA-002",
+      "cantidad": "2"
+     },
+     {
+      "componente": "MOCA-013",
+      "cantidad": "0.05"
+     }
+    ]
+   },
+   {
+    "clave": "PAHC-017",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.083333"
+     },
+     {
+      "componente": "FACHEME",
+      "cantidad": "0.03"
+     },
+     {
+      "componente": "HESEG-001",
+      "cantidad": "0.02"
+     }
+    ]
+   },
+   {
+    "clave": "PCIM-021",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MACI-001",
+      "cantidad": "0.175"
+     },
+     {
+      "componente": "MACI-006",
+      "cantidad": "0.00326"
+     },
+     {
+      "componente": "ACEL-006",
+      "cantidad": "0.00257"
+     },
+     {
+      "componente": "MOCU-003",
+      "cantidad": "0.025"
+     }
+    ]
+   },
+   {
+    "clave": "PCIM-023",
+    "tipo": "concepto",
+    "unidad": "m2",
+    "renglones": [
+     {
+      "componente": "MACI-001",
+      "cantidad": "1.0058"
+     },
+     {
+      "componente": "MACI-003",
+      "cantidad": "0.5761"
+     },
+     {
+      "componente": "MACI-009",
+      "cantidad": "0.0918"
+     },
+     {
+      "componente": "ACEL-002",
+      "cantidad": "0.0362"
+     },
+     {
+      "componente": "ACEL-007",
+      "cantidad": "0.207"
+     }
+    ]
+   },
+   {
+    "clave": "PCON-009",
+    "tipo": "concepto",
+    "unidad": "m3",
+    "renglones": [
+     {
+      "componente": "AGLU-002",
+      "cantidad": "0.36565"
+     },
+     {
+      "componente": "AGRE-001",
+      "cantidad": "0.0846"
+     },
+     {
+      "componente": "AGRE-002",
+      "cantidad": "0.117"
+     },
+     {
+      "componente": "AGRE-016",
+      "cantidad": "0.2535"
+     }
+    ]
+   },
+   {
+    "clave": "PCON-010",
+    "tipo": "concepto",
+    "unidad": "m3",
+    "renglones": [
+     {
+      "componente": "AGLU-002",
+      "cantidad": "0.347"
+     },
+     {
+      "componente": "AGRE-001",
+      "cantidad": "0.079167"
+     },
+     {
+      "componente": "AGRE-002",
+      "cantidad": "0.122333"
+     },
+     {
+      "componente": "AGRE-016",
+      "cantidad": "0.241"
+     }
+    ]
+   },
+   {
+    "clave": "PCON-011",
+    "tipo": "concepto",
+    "unidad": "m3",
+    "renglones": [
+     {
+      "componente": "AGLU-002",
+      "cantidad": "0.403"
+     },
+     {
+      "componente": "AGRE-001",
+      "cantidad": "0.084667"
+     },
+     {
+      "componente": "AGRE-002",
+      "cantidad": "0.117"
+     },
+     {
+      "componente": "AGRE-016",
+      "cantidad": "0.28"
+     }
+    ]
+   },
+   {
+    "clave": "PCON-013",
+    "tipo": "concepto",
+    "unidad": "m3",
+    "renglones": [
+     {
+      "componente": "AGLU-002",
+      "cantidad": "0.436"
+     },
+     {
+      "componente": "AGRE-001",
+      "cantidad": "0.083667"
+     },
+     {
+      "componente": "AGRE-002",
+      "cantidad": "0.115167"
+     },
+     {
+      "componente": "AGRE-016",
+      "cantidad": "0.247"
+     }
+    ]
+   },
+   {
+    "clave": "PMEZ-029",
+    "tipo": "concepto",
+    "unidad": "m3",
+    "renglones": [
+     {
+      "componente": "AGLU-002",
+      "cantidad": "0.4429"
+     },
+     {
+      "componente": "AGRE-001",
+      "cantidad": "0.201667"
+     },
+     {
+      "componente": "AGRE-016",
+      "cantidad": "0.346"
+     }
+    ]
+   }
+  ]
+ },
+ "presupuesto": [
+  {
+   "id": "1.05",
+   "tipo": "partida",
+   "clave": "05"
+  },
+  {
+   "id": "1.05.001",
+   "tipo": "partida",
+   "clave": "05.01",
+   "padre": "1.05"
+  },
+  {
+   "id": "1.05.002",
+   "tipo": "partida",
+   "clave": "05.02",
+   "padre": "1.05"
+  },
+  {
+   "id": "1.05.003",
+   "tipo": "partida",
+   "clave": "05.03",
+   "padre": "1.05"
+  },
+  {
+   "id": "1.05.004",
+   "tipo": "partida",
+   "clave": "05.04",
+   "padre": "1.05"
+  },
+  {
+   "id": "1.05.005",
+   "tipo": "partida",
+   "clave": "05.05",
+   "padre": "1.05"
+  },
+  {
+   "id": "1.05.006",
+   "tipo": "partida",
+   "clave": "05.06",
+   "padre": "1.05"
+  },
+  {
+   "id": "1.05.007",
+   "tipo": "partida",
+   "clave": "05.07",
+   "padre": "1.05"
+  },
+  {
+   "id": "1.05.008",
+   "tipo": "partida",
+   "clave": "05.08",
+   "padre": "1.05"
+  },
+  {
+   "id": "1.05.001/10",
+   "padre": "1.05.001",
+   "tipo": "concepto",
+   "clave": "050101",
+   "matriz": "050101",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.001/20",
+   "padre": "1.05.001",
+   "tipo": "concepto",
+   "clave": "050102",
+   "matriz": "050102",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.001/30",
+   "padre": "1.05.001",
+   "tipo": "concepto",
+   "clave": "050103",
+   "matriz": "050103",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.001/40",
+   "padre": "1.05.001",
+   "tipo": "concepto",
+   "clave": "050104",
+   "matriz": "050104",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.001/50",
+   "padre": "1.05.001",
+   "tipo": "concepto",
+   "clave": "050105",
+   "matriz": "050105",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.001/60",
+   "padre": "1.05.001",
+   "tipo": "concepto",
+   "clave": "050109",
+   "matriz": "050109",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.001/70",
+   "padre": "1.05.001",
+   "tipo": "concepto",
+   "clave": "050110",
+   "matriz": "050110",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.001/80",
+   "padre": "1.05.001",
+   "tipo": "concepto",
+   "clave": "050111",
+   "matriz": "050111",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.001/90",
+   "padre": "1.05.001",
+   "tipo": "concepto",
+   "clave": "050112",
+   "matriz": "050112",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.001/100",
+   "padre": "1.05.001",
+   "tipo": "concepto",
+   "clave": "050113",
+   "matriz": "050113",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.002/10",
+   "padre": "1.05.002",
+   "tipo": "concepto",
+   "clave": "050201",
+   "matriz": "050201",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.002/20",
+   "padre": "1.05.002",
+   "tipo": "concepto",
+   "clave": "050202",
+   "matriz": "050202",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.002/30",
+   "padre": "1.05.002",
+   "tipo": "concepto",
+   "clave": "050203",
+   "matriz": "050203",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.002/40",
+   "padre": "1.05.002",
+   "tipo": "concepto",
+   "clave": "050204",
+   "matriz": "050204",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.002/50",
+   "padre": "1.05.002",
+   "tipo": "concepto",
+   "clave": "050205",
+   "matriz": "050205",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.002/60",
+   "padre": "1.05.002",
+   "tipo": "concepto",
+   "clave": "050206",
+   "matriz": "050206",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.002/70",
+   "padre": "1.05.002",
+   "tipo": "concepto",
+   "clave": "050207",
+   "matriz": "050207",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.002/80",
+   "padre": "1.05.002",
+   "tipo": "concepto",
+   "clave": "050208",
+   "matriz": "050208",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.002/90",
+   "padre": "1.05.002",
+   "tipo": "concepto",
+   "clave": "050209",
+   "matriz": "050209",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.002/100",
+   "padre": "1.05.002",
+   "tipo": "concepto",
+   "clave": "050210",
+   "matriz": "050210",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.003/10",
+   "padre": "1.05.003",
+   "tipo": "concepto",
+   "clave": "050301",
+   "matriz": "050301",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.003/20",
+   "padre": "1.05.003",
+   "tipo": "concepto",
+   "clave": "050302",
+   "matriz": "050302",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.003/30",
+   "padre": "1.05.003",
+   "tipo": "concepto",
+   "clave": "050303",
+   "matriz": "050303",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.003/40",
+   "padre": "1.05.003",
+   "tipo": "concepto",
+   "clave": "050304",
+   "matriz": "050304",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.003/50",
+   "padre": "1.05.003",
+   "tipo": "concepto",
+   "clave": "050305",
+   "matriz": "050305",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.004/10",
+   "padre": "1.05.004",
+   "tipo": "concepto",
+   "clave": "050401",
+   "matriz": "050401",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.004/20",
+   "padre": "1.05.004",
+   "tipo": "concepto",
+   "clave": "050402",
+   "matriz": "050402",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.004/30",
+   "padre": "1.05.004",
+   "tipo": "concepto",
+   "clave": "050403",
+   "matriz": "050403",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.004/40",
+   "padre": "1.05.004",
+   "tipo": "concepto",
+   "clave": "050404",
+   "matriz": "050404",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.004/50",
+   "padre": "1.05.004",
+   "tipo": "concepto",
+   "clave": "050405",
+   "matriz": "050405",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.005/10",
+   "padre": "1.05.005",
+   "tipo": "concepto",
+   "clave": "050501",
+   "matriz": "050501",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.005/20",
+   "padre": "1.05.005",
+   "tipo": "concepto",
+   "clave": "050502",
+   "matriz": "050502",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.005/30",
+   "padre": "1.05.005",
+   "tipo": "concepto",
+   "clave": "050503",
+   "matriz": "050503",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.005/40",
+   "padre": "1.05.005",
+   "tipo": "concepto",
+   "clave": "050504",
+   "matriz": "050504",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.005/50",
+   "padre": "1.05.005",
+   "tipo": "concepto",
+   "clave": "050505",
+   "matriz": "050505",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.006/10",
+   "padre": "1.05.006",
+   "tipo": "concepto",
+   "clave": "050611",
+   "matriz": "050611",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.006/20",
+   "padre": "1.05.006",
+   "tipo": "concepto",
+   "clave": "050612",
+   "matriz": "050612",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.006/30",
+   "padre": "1.05.006",
+   "tipo": "concepto",
+   "clave": "050613",
+   "matriz": "050613",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.006/40",
+   "padre": "1.05.006",
+   "tipo": "concepto",
+   "clave": "050614",
+   "matriz": "050614",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.006/50",
+   "padre": "1.05.006",
+   "tipo": "concepto",
+   "clave": "050615",
+   "matriz": "050615",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.007/10",
+   "padre": "1.05.007",
+   "tipo": "concepto",
+   "clave": "050703",
+   "matriz": "050703",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.007/20",
+   "padre": "1.05.007",
+   "tipo": "concepto",
+   "clave": "050704",
+   "matriz": "050704",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.007/30",
+   "padre": "1.05.007",
+   "tipo": "concepto",
+   "clave": "050705",
+   "matriz": "050705",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.007/40",
+   "padre": "1.05.007",
+   "tipo": "concepto",
+   "clave": "050706",
+   "matriz": "050706",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.007/50",
+   "padre": "1.05.007",
+   "tipo": "concepto",
+   "clave": "050707",
+   "matriz": "050707",
+   "cantidad": "1"
+  },
+  {
+   "id": "1.05.008/10",
+   "padre": "1.05.008",
+   "tipo": "concepto",
+   "clave": "050801",
+   "matriz": "050801",
+   "cantidad": "1"
+  }
+ ],
+ "esperado": {
+  "matrices": {
+   "020414": {
+    "MXN": "60.83"
+   },
+   "040113": {
+    "MXN": "298.41"
+   },
+   "050101": {
+    "MXN": "43.68"
+   },
+   "050102": {
+    "MXN": "35.75"
+   },
+   "050103": {
+    "MXN": "33.43"
+   },
+   "050104": {
+    "MXN": "36.29"
+   },
+   "050105": {
+    "MXN": "29.87"
+   },
+   "050109": {
+    "MXN": "43681.01"
+   },
+   "050110": {
+    "MXN": "35754.81"
+   },
+   "050111": {
+    "MXN": "33427.34"
+   },
+   "050112": {
+    "MXN": "36282.25"
+   },
+   "050113": {
+    "MXN": "30169.42"
+   },
+   "050201": {
+    "MXN": "878.53"
+   },
+   "050202": {
+    "MXN": "941.54"
+   },
+   "050203": {
+    "MXN": "929.69"
+   },
+   "050204": {
+    "MXN": "998.48"
+   },
+   "050205": {
+    "MXN": "910.31"
+   },
+   "050206": {
+    "MXN": "911.25"
+   },
+   "050207": {
+    "MXN": "864.48"
+   },
+   "050208": {
+    "MXN": "943.47"
+   },
+   "050209": {
+    "MXN": "1020.77"
+   },
+   "050210": {
+    "MXN": "1026.20"
+   },
+   "050301": {
+    "MXN": "97.82"
+   },
+   "050302": {
+    "MXN": "116.72"
+   },
+   "050303": {
+    "MXN": "95.36"
+   },
+   "050304": {
+    "MXN": "81.15"
+   },
+   "050305": {
+    "MXN": "63.82"
+   },
+   "050401": {
+    "MXN": "993.66"
+   },
+   "050402": {
+    "MXN": "962.66"
+   },
+   "050403": {
+    "MXN": "1006.86"
+   },
+   "050404": {
+    "MXN": "1006.59"
+   },
+   "050405": {
+    "MXN": "1006.72"
+   },
+   "050501": {
+    "MXN": "1130.64"
+   },
+   "050502": {
+    "MXN": "1080.54"
+   },
+   "050503": {
+    "MXN": "1461.01"
+   },
+   "050504": {
+    "MXN": "1519.21"
+   },
+   "050505": {
+    "MXN": "1106.84"
+   },
+   "050611": {
+    "MXN": "938.68"
+   },
+   "050612": {
+    "MXN": "929.12"
+   },
+   "050613": {
+    "MXN": "892.01"
+   },
+   "050614": {
+    "MXN": "908.32"
+   },
+   "050615": {
+    "MXN": "932.98"
+   },
+   "050703": {
+    "MXN": "857.69"
+   },
+   "050704": {
+    "MXN": "822.65"
+   },
+   "050705": {
+    "MXN": "988.40"
+   },
+   "050706": {
+    "MXN": "1149.94"
+   },
+   "050707": {
+    "MXN": "1216.78"
+   },
+   "050801": {
+    "MXN": "465.73"
+   },
+   "MOCU-001": {
+    "MXN": "852.60"
+   },
+   "MOCU-002": {
+    "MXN": "2045.04"
+   },
+   "MOCU-003": {
+    "MXN": "2167.25"
+   },
+   "MOCU-004": {
+    "MXN": "2134.19"
+   },
+   "MOCU-005": {
+    "MXN": "2101.13"
+   },
+   "MOCU-008": {
+    "MXN": "2079.08"
+   },
+   "MOCU-016": {
+    "MXN": "2288.56"
+   },
+   "MOCU-027": {
+    "MXN": "4874.22"
+   },
+   "MOCU-029": {
+    "MXN": "1623.64"
+   },
+   "PAHC-017": {
+    "MXN": "189.63"
+   },
+   "PCIM-021": {
+    "MXN": "72.82"
+   },
+   "PCIM-023": {
+    "MXN": "117.26"
+   },
+   "PCON-009": {
+    "MXN": "2365.10"
+   },
+   "PCON-010": {
+    "MXN": "2275.80"
+   },
+   "PCON-011": {
+    "MXN": "2544.56"
+   },
+   "PCON-013": {
+    "MXN": "2682.85"
+   },
+   "PMEZ-029": {
+    "MXN": "2736.12"
+   }
+  },
+  "renglones": {
+   "1.05": {
+    "MXN": "210750.47"
+   },
+   "1.05.001": {
+    "MXN": "179493.85"
+   },
+   "1.05.002": {
+    "MXN": "9424.72"
+   },
+   "1.05.003": {
+    "MXN": "454.87"
+   },
+   "1.05.004": {
+    "MXN": "4976.49"
+   },
+   "1.05.005": {
+    "MXN": "6298.24"
+   },
+   "1.05.006": {
+    "MXN": "4601.11"
+   },
+   "1.05.007": {
+    "MXN": "5035.46"
+   },
+   "1.05.008": {
+    "MXN": "465.73"
+   },
+   "1.05.001/10": {
+    "MXN": "43.68"
+   },
+   "1.05.001/20": {
+    "MXN": "35.75"
+   },
+   "1.05.001/30": {
+    "MXN": "33.43"
+   },
+   "1.05.001/40": {
+    "MXN": "36.29"
+   },
+   "1.05.001/50": {
+    "MXN": "29.87"
+   },
+   "1.05.001/60": {
+    "MXN": "43681.01"
+   },
+   "1.05.001/70": {
+    "MXN": "35754.81"
+   },
+   "1.05.001/80": {
+    "MXN": "33427.34"
+   },
+   "1.05.001/90": {
+    "MXN": "36282.25"
+   },
+   "1.05.001/100": {
+    "MXN": "30169.42"
+   },
+   "1.05.002/10": {
+    "MXN": "878.53"
+   },
+   "1.05.002/20": {
+    "MXN": "941.54"
+   },
+   "1.05.002/30": {
+    "MXN": "929.69"
+   },
+   "1.05.002/40": {
+    "MXN": "998.48"
+   },
+   "1.05.002/50": {
+    "MXN": "910.31"
+   },
+   "1.05.002/60": {
+    "MXN": "911.25"
+   },
+   "1.05.002/70": {
+    "MXN": "864.48"
+   },
+   "1.05.002/80": {
+    "MXN": "943.47"
+   },
+   "1.05.002/90": {
+    "MXN": "1020.77"
+   },
+   "1.05.002/100": {
+    "MXN": "1026.20"
+   },
+   "1.05.003/10": {
+    "MXN": "97.82"
+   },
+   "1.05.003/20": {
+    "MXN": "116.72"
+   },
+   "1.05.003/30": {
+    "MXN": "95.36"
+   },
+   "1.05.003/40": {
+    "MXN": "81.15"
+   },
+   "1.05.003/50": {
+    "MXN": "63.82"
+   },
+   "1.05.004/10": {
+    "MXN": "993.66"
+   },
+   "1.05.004/20": {
+    "MXN": "962.66"
+   },
+   "1.05.004/30": {
+    "MXN": "1006.86"
+   },
+   "1.05.004/40": {
+    "MXN": "1006.59"
+   },
+   "1.05.004/50": {
+    "MXN": "1006.72"
+   },
+   "1.05.005/10": {
+    "MXN": "1130.64"
+   },
+   "1.05.005/20": {
+    "MXN": "1080.54"
+   },
+   "1.05.005/30": {
+    "MXN": "1461.01"
+   },
+   "1.05.005/40": {
+    "MXN": "1519.21"
+   },
+   "1.05.005/50": {
+    "MXN": "1106.84"
+   },
+   "1.05.006/10": {
+    "MXN": "938.68"
+   },
+   "1.05.006/20": {
+    "MXN": "929.12"
+   },
+   "1.05.006/30": {
+    "MXN": "892.01"
+   },
+   "1.05.006/40": {
+    "MXN": "908.32"
+   },
+   "1.05.006/50": {
+    "MXN": "932.98"
+   },
+   "1.05.007/10": {
+    "MXN": "857.69"
+   },
+   "1.05.007/20": {
+    "MXN": "822.65"
+   },
+   "1.05.007/30": {
+    "MXN": "988.40"
+   },
+   "1.05.007/40": {
+    "MXN": "1149.94"
+   },
+   "1.05.007/50": {
+    "MXN": "1216.78"
+   },
+   "1.05.008/10": {
+    "MXN": "465.73"
+   }
+  },
+  "total": {
+   "MXN": "210750.47"
+  }
+ }
+}

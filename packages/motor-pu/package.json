@@ -1,0 +1,21 @@
+{
+  "name": "@puselfhost/motor-pu",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Motor de cálculo de precios unitarios: análisis de precios (APU) y presupuestos.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "decimal.js": "^10.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "typescript": "~5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
