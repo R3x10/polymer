@@ -17,6 +17,13 @@ Abre http://localhost:8080 y entra con `ADMIN_EMAIL` / `ADMIN_PASSWORD` del `.en
 
 Hay un instalador `.exe` para Windows 10/11 que trae todo (API, interfaz y PostgreSQL portátil) y abre el sistema en una ventana. Descárgalo de [Releases](https://github.com/R3x10/polymer/releases) (`windows-ultima`). Detalles en [deploy/windows](deploy/windows/README.md).
 
+## Presupuestos
+
+- Captura desde cero: partidas, conceptos, análisis de precio unitario (matrices) e insumos, con recálculo inmediato al centavo.
+- Importación del archivo de intercambio de Neodata (`Xn_Presupuesto.xlsx` o el `.zip` que lo contiene); al terminar se compara el costo directo con el de Neodata.
+- Varios conceptos pueden usar la misma matriz con clave y descripción propias.
+- Bitácora de cambios por usuario (solo administradores).
+
 ## Roles
 
 | Rol | Puede |
@@ -31,6 +38,7 @@ Hay un instalador `.exe` para Windows 10/11 que trae todo (API, interfaz y Postg
 | --- | --- |
 | `apps/api` | API en NestJS + Drizzle ORM sobre PostgreSQL. Las migraciones (`apps/api/drizzle`) se aplican solas al arrancar. |
 | `apps/web` | Interfaz en React + Vite. |
+| `packages/motor-pu` | Motor de cálculo de precios unitarios (sin base de datos), probado contra obras reales de Neodata y Opus. |
 | `docker` | Imágenes de la API y de la web (Caddy sirve la interfaz y redirige `/api` a la API). |
 | `deploy/windows` | App de escritorio para Windows (Electron + PostgreSQL portátil) y su instalador. |
 

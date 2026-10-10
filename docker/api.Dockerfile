@@ -3,7 +3,9 @@ RUN corepack enable
 WORKDIR /app
 COPY pnpm-lock.yaml pnpm-workspace.yaml package.json tsconfig.base.json ./
 COPY apps/api/package.json apps/api/
+COPY packages/motor-pu/package.json packages/motor-pu/
 RUN pnpm install --frozen-lockfile --filter @puselfhost/api...
+COPY packages/motor-pu packages/motor-pu
 COPY apps/api apps/api
 RUN pnpm --filter @puselfhost/api build \
  && pnpm --filter @puselfhost/api deploy --prod --legacy /out \

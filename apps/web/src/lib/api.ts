@@ -34,18 +34,20 @@ export const SESION_VENCIDA = 'puselfhost:sesion-vencida';
 
 export async function api<T>(ruta: string, opciones: { method?: string; body?: unknown } = {}): Promise<T> {
   const token = tokenGuardado();
+  const esArchivo = opciones.body instanceof FormData;
   const res = await fetch(`/api${ruta}`, {
     method: opciones.method ?? 'GET',
     headers: {
-      ...(opciones.body !== undefined ? { 'Content-Type': 'application/json' } : {}),
+      ...(opciones.body !== undefined && !esArchivo ? { 'Content-Type': 'application/json' } : {}),
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
-    body: opciones.body !== undefined ? JSON.stringify(opciones.body) : undefined,
+    body: esArchivo ? (opciones.body as FormData) : opciones.body !== undefined ? JSON.stringify(opciones.body) : undefined,
   });
   const datos = res.status === 204 ? undefined : await res.json().catch(() => undefined);
   if (!res.ok) {
     if (res.status === 401 && token) window.dispatchEvent(new Event(SESION_VENCIDA));
-    throw new ApiError(res.status, datos?.message ?? `Error ${res.status}`, datos?.errores);
+    const mensaje = Array.isArray(datos?.message) ? datos.message.join('. ') : datos?.message;
+    throw new ApiError(res.status, mensaje ?? `Error ${res.status}`, datos?.errores);
   }
   return datos as T;
 }

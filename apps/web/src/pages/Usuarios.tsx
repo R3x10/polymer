@@ -2,6 +2,8 @@ import { FormEvent, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { api, ApiError, Rol, ROL_ETIQUETA, Usuario } from '../lib/api';
 import { useAuth } from '../lib/auth';
+import { AtSign, CircleDot, Shield, User } from 'lucide-react';
+import { Badge, Th } from '../components/tabla';
 
 const ROLES = Object.keys(ROL_ETIQUETA) as Rol[];
 
@@ -11,61 +13,77 @@ export function Usuarios() {
   const { data: usuarios, isLoading } = useQuery({ queryKey: ['usuarios'], queryFn: () => api<Usuario[]>('/usuarios') });
 
   const actualizar = useMutation({
-    mutationFn: ({ id, cambios }: { id: string; cambios: Partial<Usuario> }) =>
-      api<Usuario>(`/usuarios/${id}`, { method: 'PATCH', body: cambios }),
+    mutationFn: ({ id, cambios }: { id: string; cambios: Partial<Usuario> }) => api<Usuario>(`/usuarios/${id}`, { method: 'PATCH', body: cambios }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['usuarios'] }),
   });
 
   return (
     <section>
-      <h2>Usuarios</h2>
+      <div className="titulo-fila">
+        <div>
+          <h2>Usuarios</h2>
+          <p className="tenue">Quién entra al sistema y qué puede hacer.</p>
+        </div>
+      </div>
       <NuevoUsuario />
-      {isLoading ? (
-        <p className="tenue">Cargando…</p>
-      ) : (
-        <table className="tabla">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Rol</th>
-              <th>Activo</th>
-            </tr>
-          </thead>
-          <tbody>
-            {usuarios?.map((u) => {
-              const soyYo = u.id === actual?.id;
-              return (
-                <tr key={u.id}>
-                  <td>{u.nombre}</td>
-                  <td>{u.email}</td>
-                  <td>
-                    <select
-                      value={u.rol}
-                      disabled={soyYo}
-                      onChange={(e) => actualizar.mutate({ id: u.id, cambios: { rol: e.target.value as Rol } })}
-                    >
-                      {ROLES.map((r) => (
-                        <option key={r} value={r}>
-                          {ROL_ETIQUETA[r]}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                  <td>
-                    <input
-                      type="checkbox"
-                      checked={u.activo}
-                      disabled={soyYo}
-                      onChange={(e) => actualizar.mutate({ id: u.id, cambios: { activo: e.target.checked } })}
-                    />
+      <div className="vista">
+        <div className="tabla-contenedor">
+          <table className="tabla">
+            <thead>
+              <tr>
+                <Th icono={<User size={14} />}>Nombre</Th>
+                <Th icono={<AtSign size={14} />}>Correo</Th>
+                <Th icono={<Shield size={14} />}>Rol</Th>
+                <Th icono={<CircleDot size={14} />}>Estado</Th>
+                <Th>Acciones</Th>
+              </tr>
+            </thead>
+            <tbody>
+              {isLoading ? (
+                <tr>
+                  <td colSpan={5} className="vacio">
+                    Cargando…
                   </td>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
+              ) : (
+                usuarios?.map((u) => {
+                  const soyYo = u.id === actual?.id;
+                  return (
+                    <tr key={u.id}>
+                      <td>
+                        <strong>{u.nombre}</strong>
+                        {soyYo && <span className="tenue"> (tú)</span>}
+                      </td>
+                      <td>{u.email}</td>
+                      <td>
+                        <select value={u.rol} disabled={soyYo} onChange={(e) => actualizar.mutate({ id: u.id, cambios: { rol: e.target.value as Rol } })}>
+                          {ROLES.map((r) => (
+                            <option key={r} value={r}>
+                              {ROL_ETIQUETA[r]}
+                            </option>
+                          ))}
+                        </select>
+                      </td>
+                      <td>
+                        <Badge punto color={u.activo ? 'verde' : 'rojo'}>
+                          {u.activo ? 'Activo' : 'Inactivo'}
+                        </Badge>
+                      </td>
+                      <td className="acciones">
+                        {!soyYo && (
+                          <button className={u.activo ? 'peligro' : undefined} onClick={() => actualizar.mutate({ id: u.id, cambios: { activo: !u.activo } })}>
+                            {u.activo ? 'Desactivar' : 'Activar'}
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
       {actualizar.error && <p className="error">{actualizar.error.message}</p>}
     </section>
   );
@@ -108,7 +126,7 @@ function NuevoUsuario() {
           </option>
         ))}
       </select>
-      <button type="submit" disabled={crear.isPending}>
+      <button type="submit" className="primario" disabled={crear.isPending}>
         Agregar usuario
       </button>
       {err && <p className="error">{err.errores.length ? err.errores.map((e) => e.mensaje).join('. ') : err.message}</p>}
