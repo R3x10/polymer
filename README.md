@@ -1,8 +1,8 @@
 # PuSelfhost
 
-Software de precios unitarios y presupuestos de obra, autoalojado con Docker.
+Software de precios unitarios y presupuestos de obra, autoalojado: con Docker o en un contenedor LXC de Proxmox VE.
 
-## Levantar el sistema
+## Levantar el sistema con Docker
 
 Requisitos: Docker con Docker Compose.
 
@@ -24,6 +24,39 @@ Hay un instalador `.exe` para Windows 10/11 que trae todo (API, interfaz y Postg
 - Varios conceptos pueden usar la misma matriz con clave y descripción propias.
 - Bitácora de cambios por usuario (solo administradores).
 
+## Instalar en Proxmox VE (contenedor LXC)
+
+Sin Docker: un script crea un contenedor LXC con Debian 12 e instala dentro Node, PostgreSQL y Caddy como servicios normales.
+
+1. En la interfaz web de Proxmox, abre la **Shell** del nodo (entra como root).
+2. Ejecuta:
+
+   ```bash
+   bash -c "$(curl -fsSL https://raw.githubusercontent.com/R3x10/polymer/main/deploy/proxmox/puselfhost-lxc.sh)"
+   ```
+
+3. Revisa el resumen (número de contenedor, recursos, red) y confirma con `s`.
+4. Al terminar, el script muestra la dirección, por ejemplo `http://192.168.1.50`. La contraseña del administrador se ve con:
+
+   ```bash
+   pct exec <ID> -- cat /root/puselfhost-credenciales.txt
+   ```
+
+Por defecto usa el siguiente número de contenedor libre, 2 núcleos, 2 GB de RAM, 8 GB de disco en `local-lvm` y DHCP en `vmbr0`. Para cambiarlo, antepón variables al comando, por ejemplo una IP fija:
+
+```bash
+CT_IP=192.168.1.50/24 CT_GW=192.168.1.1 CT_RAM=4096 \
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/R3x10/polymer/main/deploy/proxmox/puselfhost-lxc.sh)"
+```
+
+Para actualizar a la última versión (conserva la base de datos y las contraseñas):
+
+```bash
+pct exec <ID> -- puselfhost-actualizar
+```
+
+Los respaldos normales de Proxmox (vzdump o Proxmox Backup Server) cubren programa y datos. Todas las opciones y detalles están en [`deploy/proxmox/README.md`](deploy/proxmox/README.md).
+
 ## Roles
 
 | Rol | Puede |
@@ -41,6 +74,7 @@ Hay un instalador `.exe` para Windows 10/11 que trae todo (API, interfaz y Postg
 | `packages/motor-pu` | Motor de cálculo de precios unitarios (sin base de datos), probado contra obras reales de Neodata y Opus. |
 | `docker` | Imágenes de la API y de la web (Caddy sirve la interfaz y redirige `/api` a la API). |
 | `deploy/windows` | App de escritorio para Windows (Electron + PostgreSQL portátil) y su instalador. |
+| `deploy/proxmox` | Script para Proxmox VE y su instalador nativo para Debian. |
 
 ## Desarrollo
 
