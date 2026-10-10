@@ -7,3 +7,5 @@ export { calcularMatriz, costoManoDeObra, ErrorDeCatalogo, MotorApu } from './ap
 export type { MatrizCalculada, RenglonCalculado } from './apu';
 export { calcularPresupuesto } from './presupuesto';
 export type { PresupuestoCalculado, RenglonPresupuesto, RenglonPresupuestoCalculado } from './presupuesto';
+export { calcularCuantificacion, ErrorDeFormula, evaluarExpresion, resultadoCuantificacion } from './cuantificacion';
+export type { RenglonCuantificacion } from './cuantificacion';

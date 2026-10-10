@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "dev": "tsx watch src/main.ts",
+    "build": "pnpm --filter @puselfhost/motor-pu build && tsc -p tsconfig.build.json",
+    "dev": "pnpm --filter @puselfhost/motor-pu build && tsx watch src/main.ts",
     "start": "node dist/main.js",
-    "typecheck": "tsc --noEmit",
-    "test": "jest",
-    "test:e2e": "jest --config test/jest-e2e.config.js --runInBand",
+    "typecheck": "pnpm --filter @puselfhost/motor-pu build && tsc --noEmit",
+    "test": "pnpm --filter @puselfhost/motor-pu build && jest",
+    "test:e2e": "pnpm --filter @puselfhost/motor-pu build && jest --config test/jest-e2e.config.js --runInBand",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
@@ -16,11 +16,14 @@
     "@nestjs/core": "^11.1.6",
     "@nestjs/jwt": "^11.0.0",
     "@nestjs/platform-express": "^11.1.6",
+    "@puselfhost/motor-pu": "workspace:*",
     "bcryptjs": "^3.0.2",
     "drizzle-orm": "^0.44.5",
+    "fflate": "^0.8.2",
     "pg": "^8.16.3",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
+    "saxes": "^6.0.0",
     "zod": "^4.1.5"
   },
   "devDependencies": {
@@ -35,6 +38,7 @@
     "supertest": "^7.1.4",
     "ts-jest": "^29.4.1",
     "tsx": "^4.20.5",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "@types/multer": "^2.0.0"
   }
 }

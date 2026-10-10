@@ -38,8 +38,12 @@ export function Login() {
           Contraseña
           <input type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </label>
-        {error && <p className="error" role="alert">{error}</p>}
-        <button type="submit" disabled={enviando}>
+        {error && (
+          <p className="error" role="alert">
+            {error}
+          </p>
+        )}
+        <button type="submit" className="primario" disabled={enviando}>
           {enviando ? 'Entrando…' : 'Entrar'}
         </button>
       </form>
