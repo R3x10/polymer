@@ -1,4 +1,4 @@
-import { FormEvent, useMemo, useState } from 'react';
+import { FormEvent, Fragment, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
@@ -14,6 +14,7 @@ import {
   Pencil,
   Plus,
   Ruler,
+  SquareSigma,
   Sigma,
   Trash2,
 } from 'lucide-react';
@@ -21,6 +22,7 @@ import { Th } from '../../components/tabla';
 import { api } from '../../lib/api';
 import { cantidadTexto, dinero, mensajeError, RenglonArbol } from '../../lib/presupuestos';
 import { CampoEditable, useDetalle, useIdPresupuesto, useMatrices, usePuedeEditar } from './comun';
+import { Cuantificacion } from './Cuantificacion';
 
 interface Nodo {
   r: RenglonArbol;
@@ -50,13 +52,17 @@ export function Arbol() {
   const [plegadas, setPlegadas] = useState<Set<string>>(new Set());
   const [seleccion, setSeleccion] = useState<string | null>(null);
   const [formulario, setFormulario] = useState<'partida' | 'concepto' | null>(null);
+  const [cuantificando, setCuantificando] = useState<string | null>(null);
 
   const nodos = useMemo(() => (data ? aplanar(data.renglones, plegadas) : []), [data, plegadas]);
   const refrescar = () => qc.invalidateQueries({ queryKey: ['presupuesto', id] });
 
   const cambiar = useMutation({
     mutationFn: ({ rid, cambios }: { rid: string; cambios: Record<string, string> }) =>
-      api(`/presupuestos/${id}/renglones/${rid}`, { method: 'PATCH', body: cambios }),
+      api(`/presupuestos/${id}/renglones/${rid}`, {
+        method: 'PATCH',
+        body: cambios,
+      }),
     onSettled: refrescar,
   });
   const borrar = useMutation({
@@ -129,69 +135,109 @@ export function Arbol() {
               </thead>
               <tbody>
                 {nodos.map(({ r, nivel }) => (
-                  <tr
-                    key={r.id}
-                    className={`${r.tipo} ${seleccion === r.id ? 'seleccionado' : ''}`}
-                    onClick={() => setSeleccion(r.tipo === 'partida' ? r.id : r.padreId)}
-                  >
-                    <td style={{ paddingLeft: `${0.75 + nivel * 1.1}rem` }} className="nowrap">
-                      {r.tipo === 'partida' ? (
-                        <button className="plegar" onClick={(e) => (e.stopPropagation(), alternar(r.id))} aria-label="Plegar o expandir">
-                          {plegadas.has(r.id) ? <ChevronRight size={14} /> : <ChevronDown size={14} />}
-                        </button>
-                      ) : null}
-                      {puedeEditar ? (
-                        <CampoEditable ancho="6.5rem" valor={r.clave} guardar={(v) => cambiar.mutate({ rid: r.id, cambios: { clave: v } })} />
-                      ) : (
-                        r.clave
-                      )}
-                      {r.tipo === 'concepto' && r.matrizClave !== r.clave && (
-                        <span className="tenue pequeno" title="Este concepto usa el análisis de otra clave">
-                          <Link2 size={12} /> {r.matrizClave}
-                        </span>
-                      )}
-                    </td>
-                    <td className="descripcion" title={r.descripcion}>
-                      {r.tipo === 'partida' && puedeEditar ? (
-                        <CampoEditable valor={r.descripcion} guardar={(v) => cambiar.mutate({ rid: r.id, cambios: { descripcion: v } })} />
-                      ) : (
-                        r.descripcion
-                      )}
-                    </td>
-                    <td>{r.unidad}</td>
-                    <td className="num">
-                      {r.tipo === 'concepto' && (
-                        <CampoEditable
-                          className="num"
-                          ancho="7rem"
-                          deshabilitado={!puedeEditar}
-                          valor={cantidadTexto(r.cantidad)}
-                          guardar={(v) => cambiar.mutate({ rid: r.id, cambios: { cantidad: v } })}
-                        />
-                      )}
-                    </td>
-                    <td className="num">{r.tipo === 'concepto' && dinero(r.precioUnitario, moneda)}</td>
-                    <td className="num">{dinero(r.importe, moneda)}</td>
-                    <td className="acciones">
-                      {r.tipo === 'concepto' && (
-                        <Link className="boton" to={`matrices/${r.matrizId}`} onClick={(e) => e.stopPropagation()}>
-                          <Pencil size={14} /> {puedeEditar ? 'Análisis' : 'Ver'}
-                        </Link>
-                      )}
-                      {puedeEditar && (
-                        <button
-                          className="peligro"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            const que = r.tipo === 'partida' ? `la partida ${r.clave} con todo su contenido` : `el concepto ${r.clave}`;
-                            if (confirm(`¿Eliminar ${que} del presupuesto?`)) borrar.mutate(r.id);
-                          }}
-                        >
-                          <Trash2 size={14} />
-                        </button>
-                      )}
-                    </td>
-                  </tr>
+                  <Fragment key={r.id}>
+                    <tr
+                      className={`${r.tipo} ${seleccion === r.id ? 'seleccionado' : ''}`}
+                      onClick={() => setSeleccion(r.tipo === 'partida' ? r.id : r.padreId)}
+                    >
+                      <td style={{ paddingLeft: `${0.75 + nivel * 1.1}rem` }} className="nowrap">
+                        {r.tipo === 'partida' ? (
+                          <button className="plegar" onClick={(e) => (e.stopPropagation(), alternar(r.id))} aria-label="Plegar o expandir">
+                            {plegadas.has(r.id) ? <ChevronRight size={14} /> : <ChevronDown size={14} />}
+                          </button>
+                        ) : null}
+                        {puedeEditar ? (
+                          <CampoEditable
+                            ancho="6.5rem"
+                            valor={r.clave}
+                            guardar={(v) =>
+                              cambiar.mutate({
+                                rid: r.id,
+                                cambios: { clave: v },
+                              })
+                            }
+                          />
+                        ) : (
+                          r.clave
+                        )}
+                        {r.tipo === 'concepto' && r.matrizClave !== r.clave && (
+                          <span className="tenue pequeno" title="Este concepto usa el análisis de otra clave">
+                            <Link2 size={12} /> {r.matrizClave}
+                          </span>
+                        )}
+                      </td>
+                      <td className="descripcion" title={r.descripcion}>
+                        {r.tipo === 'partida' && puedeEditar ? (
+                          <CampoEditable
+                            valor={r.descripcion}
+                            guardar={(v) =>
+                              cambiar.mutate({
+                                rid: r.id,
+                                cambios: { descripcion: v },
+                              })
+                            }
+                          />
+                        ) : (
+                          r.descripcion
+                        )}
+                      </td>
+                      <td>{r.unidad}</td>
+                      <td className="num nowrap">
+                        {r.tipo === 'concepto' && (
+                          <>
+                            <button
+                              className={`icono ${r.cuantificado ? 'activo' : ''}`}
+                              title={r.cuantificado ? 'La cantidad sale de su cuantificación' : 'Cuantificar'}
+                              aria-label="Cuantificación"
+                              onClick={(e) => (e.stopPropagation(), setCuantificando(cuantificando === r.id ? null : r.id))}
+                            >
+                              <SquareSigma size={14} />
+                            </button>
+                            <CampoEditable
+                              className="num"
+                              ancho="7rem"
+                              deshabilitado={!puedeEditar || r.cuantificado}
+                              valor={cantidadTexto(r.cantidad)}
+                              guardar={(v) =>
+                                cambiar.mutate({
+                                  rid: r.id,
+                                  cambios: { cantidad: v },
+                                })
+                              }
+                            />
+                          </>
+                        )}
+                      </td>
+                      <td className="num">{r.tipo === 'concepto' && dinero(r.precioUnitario, moneda)}</td>
+                      <td className="num">{dinero(r.importe, moneda)}</td>
+                      <td className="acciones">
+                        {r.tipo === 'concepto' && (
+                          <Link className="boton" to={`matrices/${r.matrizId}`} onClick={(e) => e.stopPropagation()}>
+                            <Pencil size={14} /> {puedeEditar ? 'Análisis' : 'Ver'}
+                          </Link>
+                        )}
+                        {puedeEditar && (
+                          <button
+                            className="peligro"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const que = r.tipo === 'partida' ? `la partida ${r.clave} con todo su contenido` : `el concepto ${r.clave}`;
+                              if (confirm(`¿Eliminar ${que} del presupuesto?`)) borrar.mutate(r.id);
+                            }}
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                    {cuantificando === r.id && (
+                      <tr className="detalle">
+                        <td colSpan={7}>
+                          <Cuantificacion presupuestoId={id} renglonId={r.id} editable={puedeEditar} cerrar={() => setCuantificando(null)} />
+                        </td>
+                      </tr>
+                    )}
+                  </Fragment>
                 ))}
               </tbody>
             </table>
@@ -219,7 +265,12 @@ function NuevoRenglon({ tipo, padreId, cerrar }: { tipo: 'partida' | 'concepto';
         body:
           tipo === 'partida'
             ? { tipo, padreId, clave, descripcion }
-            : { tipo, padreId, cantidad, ...(existente ? { matrizId: existente.id } : { nueva: { clave, descripcion, unidad } }) },
+            : {
+                tipo,
+                padreId,
+                cantidad,
+                ...(existente ? { matrizId: existente.id } : { nueva: { clave, descripcion, unidad } }),
+              },
       }),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['presupuesto', id] });

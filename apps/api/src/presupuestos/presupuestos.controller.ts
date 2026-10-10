@@ -17,9 +17,10 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { z } from 'zod';
 import { Roles, SesionUsuario, UsuarioActual } from '../auth/decorators';
 import { ZodValidationPipe } from '../common/zod-validation.pipe';
-import { TIPOS_INSUMO, TIPOS_MATRIZ } from '../db/schema';
+import { ESTADOS_PRESUPUESTO, ETAPAS_PRESUPUESTO, TIPOS_INSUMO, TIPOS_MATRIZ, TIPOS_PRESUPUESTO, TIPOS_PROYECTO } from '../db/schema';
 import { ImportarService } from '../importar/importar.service';
 import { PresupuestosService } from './presupuestos.service';
+import { ProyectosService } from './proyectos.service';
 
 const EDITAN = ['admin', 'presupuestador'] as const;
 const LIMITE_ARCHIVO = 200 * 1024 * 1024;
@@ -29,7 +30,37 @@ const opcional = z.string().trim().nullish();
 const decimal = (msg = 'Número inválido') =>
   z.union([z.string(), z.number()]).transform((v) => String(v).trim().replace(/,/g, '')).pipe(z.string().regex(/^-?\d+(\.\d+)?$/, msg));
 
-const presupuestoSchema = z.object({ nombre: texto('Escribe el nombre'), cliente: opcional, ubicacion: opcional });
+const medida = decimal('Medida inválida').nullable();
+
+const proyectoSchema = z.object({ nombre: texto('Escribe el nombre del proyecto'), tipo: z.enum(TIPOS_PROYECTO).default('obra'), cliente: opcional, ubicacion: opcional });
+const cambioProyectoSchema = z.object({ nombre: texto('Escribe el nombre del proyecto'), tipo: z.enum(TIPOS_PROYECTO), cliente: opcional, ubicacion: opcional }).partial();
+const presupuestoSchema = z
+  .object({
+    nombre: texto('Escribe el nombre'),
+    proyectoId: z.uuid().optional(),
+    proyecto: z.string().trim().min(1).optional(),
+    tipo: z.enum(TIPOS_PRESUPUESTO).default('venta'),
+    etapa: z.enum(ETAPAS_PRESUPUESTO).default('inicial'),
+    monedaBase: z.string().trim().toUpperCase().min(3).max(3).optional(),
+  })
+  .refine((d) => d.proyectoId || d.proyecto, { message: 'Indica el proyecto del presupuesto', path: ['proyecto'] });
+const cambioPresupuestoSchema = z
+  .object({ nombre: texto('Escribe el nombre'), proyectoId: z.uuid(), tipo: z.enum(TIPOS_PRESUPUESTO), etapa: z.enum(ETAPAS_PRESUPUESTO), estado: z.enum(ESTADOS_PRESUPUESTO) })
+  .partial();
+const duplicarSchema = z.object({ nombre: texto('Escribe el nombre'), proyectoId: z.uuid(), tipo: z.enum(TIPOS_PRESUPUESTO), etapa: z.enum(ETAPAS_PRESUPUESTO) }).partial();
+const cuantificacionSchema = z.object({
+  renglones: z.array(
+    z.object({
+      descripcion: z.string().trim().default(''),
+      eje: z.string().trim().default(''),
+      piezas: medida.default(null),
+      largo: medida.default(null),
+      ancho: medida.default(null),
+      alto: medida.default(null),
+      formula: z.string().trim().default(''),
+    }),
+  ),
+});
 const partidaSchema = z.object({ tipo: z.literal('partida'), padreId: z.uuid().nullish(), clave: z.string().trim(), descripcion: texto('Escribe la descripción') });
 const conceptoSchema = z.object({
   tipo: z.literal('concepto'),
@@ -87,15 +118,19 @@ export class PresupuestosController {
   @Post()
   @Roles(...EDITAN)
   crear(@Body(v(presupuestoSchema)) datos: Validado<typeof presupuestoSchema>, @UsuarioActual() u: SesionUsuario) {
-    return this.servicio.crear({ nombre: datos.nombre, cliente: datos.cliente ?? undefined, ubicacion: datos.ubicacion ?? undefined }, u.id);
+    return this.servicio.crear(datos, u.id);
   }
 
   @Post('importar/neodata')
   @Roles(...EDITAN)
   @UseInterceptors(FileInterceptor('archivo', { limits: { fileSize: LIMITE_ARCHIVO } }))
-  importarNeodata(@UploadedFile() archivo: Express.Multer.File | undefined, @Body('nombre') nombre: string | undefined, @UsuarioActual() u: SesionUsuario) {
+  importarNeodata(
+    @UploadedFile() archivo: Express.Multer.File | undefined,
+    @Body(v(z.object({ nombre: z.string().optional(), proyectoId: z.uuid().or(z.literal('')).optional() }))) campos: { nombre?: string; proyectoId?: string },
+    @UsuarioActual() u: SesionUsuario,
+  ) {
     if (!archivo) throw new BadRequestException('Adjunta el archivo de intercambio de Neodata');
-    return this.importar.neodata(new Uint8Array(archivo.buffer), u.id, nombre);
+    return this.importar.neodata(new Uint8Array(archivo.buffer), u.id, { nombre: campos.nombre, proyectoId: campos.proyectoId || undefined });
   }
 
   @Get(':id')
@@ -105,8 +140,14 @@ export class PresupuestosController {
 
   @Patch(':id')
   @Roles(...EDITAN)
-  actualizar(@Param('id', uuid) id: string, @Body(v(presupuestoSchema.partial())) cambios: Partial<Validado<typeof presupuestoSchema>>) {
+  actualizar(@Param('id', uuid) id: string, @Body(v(cambioPresupuestoSchema)) cambios: Validado<typeof cambioPresupuestoSchema>) {
     return this.servicio.actualizar(id, cambios);
+  }
+
+  @Post(':id/duplicar')
+  @Roles(...EDITAN)
+  duplicar(@Param('id', uuid) id: string, @Body(v(duplicarSchema)) datos: Validado<typeof duplicarSchema>, @UsuarioActual() u: SesionUsuario) {
+    return this.servicio.duplicar(id, datos, u.id);
   }
 
   @Delete(':id')
@@ -135,6 +176,17 @@ export class PresupuestosController {
   @HttpCode(204)
   eliminarRenglon(@Param('id', uuid) id: string, @Param('rid', uuid) rid: string) {
     return this.servicio.eliminarRenglon(id, rid);
+  }
+
+  @Get(':id/renglones/:rid/cuantificacion')
+  cuantificacion(@Param('id', uuid) id: string, @Param('rid', uuid) rid: string) {
+    return this.servicio.cuantificacion(id, rid);
+  }
+
+  @Put(':id/renglones/:rid/cuantificacion')
+  @Roles(...EDITAN)
+  guardarCuantificacion(@Param('id', uuid) id: string, @Param('rid', uuid) rid: string, @Body(v(cuantificacionSchema)) datos: Validado<typeof cuantificacionSchema>) {
+    return this.servicio.guardarCuantificacion(id, rid, datos.renglones);
   }
 
   // Insumos
@@ -198,5 +250,34 @@ export class PresupuestosController {
   @HttpCode(204)
   eliminarMatriz(@Param('id', uuid) id: string, @Param('mid', uuid) mid: string) {
     return this.servicio.eliminarMatriz(id, mid);
+  }
+}
+
+@Controller('proyectos')
+export class ProyectosController {
+  constructor(private readonly servicio: ProyectosService) {}
+
+  @Get()
+  listar() {
+    return this.servicio.listar();
+  }
+
+  @Post()
+  @Roles(...EDITAN)
+  crear(@Body(v(proyectoSchema)) datos: Validado<typeof proyectoSchema>) {
+    return this.servicio.crear(datos);
+  }
+
+  @Patch(':id')
+  @Roles(...EDITAN)
+  actualizar(@Param('id', uuid) id: string, @Body(v(cambioProyectoSchema)) cambios: Validado<typeof cambioProyectoSchema>) {
+    return this.servicio.actualizar(id, cambios);
+  }
+
+  @Delete(':id')
+  @Roles(...EDITAN)
+  @HttpCode(204)
+  eliminar(@Param('id', uuid) id: string) {
+    return this.servicio.eliminar(id);
   }
 }

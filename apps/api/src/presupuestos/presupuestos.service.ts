@@ -1,12 +1,47 @@
 import { BadRequestException, ConflictException, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { randomUUID } from 'node:crypto';
 import { and, asc, count, desc, eq, isNull, max, sql } from 'drizzle-orm';
-import { calcularPresupuesto, MontosTexto, RenglonPresupuesto } from '@puselfhost/motor-pu';
+import { calcularCuantificacion, calcularPresupuesto, ErrorDeFormula, MontosTexto, RenglonPresupuesto } from '@puselfhost/motor-pu';
 import { DB, Db } from '../db/db.module';
-import { insumos, matrices, matrizRenglones, presupuestoRenglones, presupuestos, TIPOS_INSUMO, TIPOS_MATRIZ } from '../db/schema';
+import { porLotes } from '../db/lotes';
+import {
+  cuantificaciones,
+  ESTADOS_PRESUPUESTO,
+  ETAPAS_PRESUPUESTO,
+  insumos,
+  matrices,
+  matrizRenglones,
+  presupuestoRenglones,
+  presupuestos,
+  proyectos,
+  TIPOS_INSUMO,
+  TIPOS_MATRIZ,
+  TIPOS_PRESUPUESTO,
+} from '../db/schema';
 import { CatalogoService, traducirErrorDeCatalogo } from './catalogo.service';
+import { ProyectosService } from './proyectos.service';
 
 type TipoInsumo = (typeof TIPOS_INSUMO)[number];
 type TipoMatriz = (typeof TIPOS_MATRIZ)[number];
+
+export interface DatosPresupuesto {
+  nombre: string;
+  tipo: (typeof TIPOS_PRESUPUESTO)[number];
+  etapa: (typeof ETAPAS_PRESUPUESTO)[number];
+  estado: (typeof ESTADOS_PRESUPUESTO)[number];
+  monedaBase: string;
+  proyectoId: string;
+}
+
+export interface DatosCuantificacion {
+  descripcion: string;
+  eje: string;
+  piezas: string | null;
+  largo: string | null;
+  ancho: string | null;
+  alto: string | null;
+  formula: string;
+}
 
 export interface RenglonArbol {
   id: string;
@@ -19,6 +54,8 @@ export interface RenglonArbol {
   /** Clave de la matriz del concepto; puede ser distinta de la clave del concepto. */
   matrizClave: string | null;
   cantidad: string | null;
+  /** La cantidad sale de su cuantificación y no se captura directo. */
+  cuantificado: boolean;
   precioUnitario?: MontosTexto;
   importe: MontosTexto;
 }
@@ -44,6 +81,7 @@ export class PresupuestosService {
   constructor(
     @Inject(DB) private readonly db: Db,
     private readonly catalogo: CatalogoService,
+    private readonly proyectos: ProyectosService,
   ) {}
 
   // --- Presupuestos -------------------------------------------------------
@@ -53,28 +91,55 @@ export class PresupuestosService {
       .select({
         id: presupuestos.id,
         nombre: presupuestos.nombre,
-        cliente: presupuestos.cliente,
+        proyectoId: presupuestos.proyectoId,
+        proyecto: proyectos.nombre,
+        cliente: proyectos.cliente,
+        tipo: presupuestos.tipo,
+        etapa: presupuestos.etapa,
+        estado: presupuestos.estado,
         origen: presupuestos.origen,
         actualizadoEn: presupuestos.actualizadoEn,
-        conceptos: sql<number>`(select count(*)::int from ${presupuestoRenglones} r where r.presupuesto_id = ${presupuestos.id} and r.tipo = 'concepto')`,
+        conceptos: sql<number>`(select count(*)::int from ${presupuestoRenglones} r where r.presupuesto_id = "presupuestos"."id" and r.tipo = 'concepto')`,
       })
       .from(presupuestos)
+      .innerJoin(proyectos, eq(proyectos.id, presupuestos.proyectoId))
       .orderBy(desc(presupuestos.actualizadoEn));
   }
 
-  async crear(datos: { nombre: string; cliente?: string; ubicacion?: string }, usuarioId: string) {
-    const [p] = await this.db.insert(presupuestos).values({ ...datos, creadoPor: usuarioId }).returning();
+  /** Crea un presupuesto en un proyecto existente (`proyectoId`) o en uno que se busca o crea por nombre. */
+  async crear(datos: Partial<Omit<DatosPresupuesto, 'estado'>> & { nombre: string; proyecto?: string }, usuarioId: string) {
+    const { proyecto: nombreProyecto, ...resto } = datos;
+    let proyectoId = datos.proyectoId;
+    if (proyectoId) await this.proyectos.obtener(proyectoId);
+    else if (nombreProyecto) proyectoId = (await this.proyectos.buscarOCrear({ nombre: nombreProyecto })).id;
+    else throw new BadRequestException('Indica el proyecto del presupuesto');
+    const [p] = await this.db.insert(presupuestos).values({ ...resto, proyectoId, creadoPor: usuarioId }).returning();
     return p;
   }
 
-  async actualizar(id: string, cambios: { nombre?: string; cliente?: string | null; ubicacion?: string | null }) {
+  async actualizar(id: string, cambios: Partial<DatosPresupuesto>) {
+    const actual = await this.catalogo.presupuesto(id);
+    if (actual.estado === 'congelado' && Object.keys(cambios).some((k) => k !== 'estado')) {
+      throw new ConflictException('El presupuesto está congelado: cambia su estado para modificarlo');
+    }
+    if (cambios.proyectoId) await this.proyectos.obtener(cambios.proyectoId);
     const [p] = await this.db.update(presupuestos).set({ ...cambios, actualizadoEn: new Date() }).where(eq(presupuestos.id, id)).returning();
-    if (!p) throw new NotFoundException('Presupuesto no encontrado');
     return p;
+  }
+
+  /** Falla si el presupuesto está congelado. Se llama antes de cualquier cambio a su contenido. */
+  private async editable(id: string) {
+    const p = await this.catalogo.presupuesto(id);
+    this.validarEditable(p);
+    return p;
+  }
+
+  private validarEditable(p: { estado: string }) {
+    if (p.estado === 'congelado') throw new ConflictException('El presupuesto está congelado: cambia su estado para modificarlo');
   }
 
   async eliminar(id: string) {
-    await this.catalogo.presupuesto(id);
+    await this.editable(id);
     await this.db.transaction(async (tx) => {
       // El árbol referencia matrices con "restrict": se borra primero.
       await tx.delete(presupuestoRenglones).where(eq(presupuestoRenglones.presupuestoId, id));
@@ -97,6 +162,7 @@ export class PresupuestosService {
       .where(eq(presupuestoRenglones.presupuestoId, id))
       .orderBy(asc(presupuestoRenglones.orden));
     const matrizPorId = new Map(cat.matrices.map((m) => [m.id, m]));
+    const [proyecto, cuantificados] = await Promise.all([this.proyectos.obtener(cat.presupuesto.proyectoId), this.cuantificados(id)]);
 
     const entrada: RenglonPresupuesto[] = filas.map((f) =>
       f.tipo === 'concepto'
@@ -123,11 +189,22 @@ export class PresupuestosService {
         matrizId: f.matrizId,
         matrizClave: m?.clave ?? null,
         cantidad: f.cantidad,
+        cuantificado: cuantificados.has(f.id),
         precioUnitario: c.precioUnitario,
         importe: c.importe,
       };
     });
-    return { presupuesto: cat.presupuesto, renglones, total: calculo.total };
+    return { presupuesto: cat.presupuesto, proyecto, renglones, total: calculo.total };
+  }
+
+  /** Ids de los conceptos del presupuesto que tienen cuantificación. */
+  private async cuantificados(presupuestoId: string) {
+    const filas = await this.db
+      .selectDistinct({ id: cuantificaciones.renglonId })
+      .from(cuantificaciones)
+      .innerJoin(presupuestoRenglones, eq(presupuestoRenglones.id, cuantificaciones.renglonId))
+      .where(eq(presupuestoRenglones.presupuestoId, presupuestoId));
+    return new Set(filas.map((f) => f.id));
   }
 
   private async siguienteOrden(presupuestoId: string, padreId: string | null) {
@@ -153,7 +230,7 @@ export class PresupuestosService {
   }
 
   async agregarPartida(presupuestoId: string, datos: { padreId?: string | null; clave: string; descripcion: string }) {
-    await this.catalogo.presupuesto(presupuestoId);
+    await this.editable(presupuestoId);
     const padreId = datos.padreId ?? null;
     if (padreId && (await this.renglon(presupuestoId, padreId)).tipo !== 'partida') {
       throw new BadRequestException('Solo se puede agregar dentro de una partida');
@@ -181,7 +258,7 @@ export class PresupuestosService {
       nueva?: { clave: string; descripcion: string; unidad: string };
     },
   ) {
-    await this.catalogo.presupuesto(presupuestoId);
+    await this.editable(presupuestoId);
     const padreId = datos.padreId ?? null;
     if (padreId && (await this.renglon(presupuestoId, padreId)).tipo !== 'partida') {
       throw new BadRequestException('Los conceptos van dentro de una partida');
@@ -223,7 +300,11 @@ export class PresupuestosService {
     renglonId: string,
     cambios: { clave?: string; descripcion?: string; unidad?: string; cantidad?: string; matrizId?: string },
   ) {
+    await this.editable(presupuestoId);
     const actual = await this.renglon(presupuestoId, renglonId);
+    if (cambios.cantidad !== undefined && (await this.cuantificados(presupuestoId)).has(renglonId)) {
+      throw new BadRequestException('La cantidad de este concepto sale de su cuantificación');
+    }
     if (actual.tipo === 'partida' && (cambios.cantidad !== undefined || cambios.matrizId !== undefined || cambios.unidad !== undefined)) {
       throw new BadRequestException('Las partidas no llevan cantidad, unidad ni matriz');
     }
@@ -237,6 +318,7 @@ export class PresupuestosService {
   }
 
   async eliminarRenglon(presupuestoId: string, renglonId: string) {
+    await this.editable(presupuestoId);
     await this.renglon(presupuestoId, renglonId);
     await this.db.delete(presupuestoRenglones).where(eq(presupuestoRenglones.id, renglonId));
     await this.tocar(presupuestoId);
@@ -262,7 +344,7 @@ export class PresupuestosService {
   }
 
   async crearInsumo(presupuestoId: string, datos: DatosInsumo) {
-    await this.catalogo.presupuesto(presupuestoId);
+    await this.editable(presupuestoId);
     await this.validarClaveLibre(presupuestoId, datos.clave);
     const [i] = await this.db.insert(insumos).values({ presupuestoId, ...datos }).returning();
     await this.tocar(presupuestoId);
@@ -270,6 +352,7 @@ export class PresupuestosService {
   }
 
   async actualizarInsumo(presupuestoId: string, insumoId: string, cambios: Partial<Omit<DatosInsumo, 'clave'>>) {
+    await this.editable(presupuestoId);
     const [i] = await this.db
       .update(insumos)
       .set(cambios)
@@ -281,6 +364,7 @@ export class PresupuestosService {
   }
 
   async eliminarInsumo(presupuestoId: string, insumoId: string) {
+    await this.editable(presupuestoId);
     const [i] = await this.db.select().from(insumos).where(and(eq(insumos.id, insumoId), eq(insumos.presupuestoId, presupuestoId)));
     if (!i) throw new NotFoundException('Insumo no encontrado');
     const [{ n }] = await this.db
@@ -337,6 +421,7 @@ export class PresupuestosService {
   }
 
   async actualizarMatriz(presupuestoId: string, matrizId: string, cambios: { clave?: string; descripcion?: string; unidad?: string; tipo?: TipoMatriz }) {
+    await this.editable(presupuestoId);
     if (cambios.clave) await this.validarClaveLibre(presupuestoId, cambios.clave, matrizId);
     try {
       return await this.db.transaction(async (tx) => {
@@ -366,6 +451,7 @@ export class PresupuestosService {
   /** Reemplaza los renglones de un análisis. Valida que los componentes existan y que no haya ciclos. */
   async guardarRenglonesMatriz(presupuestoId: string, matrizId: string, renglones: { componente: string; cantidad: string }[]) {
     const cat = await this.catalogo.cargar(presupuestoId);
+    this.validarEditable(cat.presupuesto);
     const m = cat.matrices.find((x) => x.id === matrizId);
     if (!m) throw new NotFoundException('Matriz no encontrada');
 
@@ -386,7 +472,7 @@ export class PresupuestosService {
   }
 
   async crearMatriz(presupuestoId: string, datos: { clave: string; descripcion: string; unidad: string; tipo: TipoMatriz }) {
-    await this.catalogo.presupuesto(presupuestoId);
+    await this.editable(presupuestoId);
     await this.validarClaveLibre(presupuestoId, datos.clave);
     try {
       const [m] = await this.db.insert(matrices).values({ presupuestoId, ...datos }).returning();
@@ -399,6 +485,7 @@ export class PresupuestosService {
 
   async eliminarMatriz(presupuestoId: string, matrizId: string) {
     const cat = await this.catalogo.cargar(presupuestoId);
+    this.validarEditable(cat.presupuesto);
     const m = cat.matrices.find((x) => x.id === matrizId);
     if (!m) throw new NotFoundException('Matriz no encontrada');
     const usada = cat.matrices.filter((x) => (cat.renglones.get(x.id) ?? []).some((r) => r.componente === m.clave));
@@ -409,5 +496,114 @@ export class PresupuestosService {
       throw codigoPg(e) === PG_FK_VIOLATION ? new ConflictException(`No se puede borrar: ${m.clave} está en el presupuesto`) : e;
     }
     await this.tocar(presupuestoId);
+  }
+
+  // --- Cuantificación (generadores) ---------------------------------------
+
+  async cuantificacion(presupuestoId: string, renglonId: string) {
+    const r = await this.renglon(presupuestoId, renglonId);
+    if (r.tipo !== 'concepto') throw new BadRequestException('Solo los conceptos llevan cuantificación');
+    const filas = await this.db.select().from(cuantificaciones).where(eq(cuantificaciones.renglonId, renglonId)).orderBy(asc(cuantificaciones.orden));
+    const calculo = this.calcularCuantificacion(filas);
+    return {
+      renglonId,
+      clave: r.clave,
+      descripcion: r.descripcion,
+      unidad: r.unidad,
+      cantidad: r.cantidad,
+      renglones: filas.map((f, i) => ({ ...f, resultado: calculo.resultados[i] })),
+      total: calculo.total,
+    };
+  }
+
+  private calcularCuantificacion(filas: Omit<DatosCuantificacion, 'descripcion' | 'eje'>[]) {
+    try {
+      return calcularCuantificacion(filas);
+    } catch (e) {
+      throw e instanceof ErrorDeFormula ? new BadRequestException(e.message) : e;
+    }
+  }
+
+  /**
+   * Reemplaza la cuantificación de un concepto y le pone como cantidad la suma de sus renglones.
+   * Sin renglones, el concepto conserva su última cantidad y vuelve a capturarse a mano.
+   */
+  async guardarCuantificacion(presupuestoId: string, renglonId: string, filas: DatosCuantificacion[]) {
+    await this.editable(presupuestoId);
+    const r = await this.renglon(presupuestoId, renglonId);
+    if (r.tipo !== 'concepto') throw new BadRequestException('Solo los conceptos llevan cuantificación');
+    const calculo = this.calcularCuantificacion(filas);
+    await this.db.transaction(async (tx) => {
+      await tx.delete(cuantificaciones).where(eq(cuantificaciones.renglonId, renglonId));
+      if (filas.length) {
+        await tx.insert(cuantificaciones).values(filas.map((f, i) => ({ ...f, renglonId, orden: (i + 1) * 10 })));
+        await tx.update(presupuestoRenglones).set({ cantidad: calculo.total }).where(eq(presupuestoRenglones.id, renglonId));
+      }
+    });
+    await this.tocar(presupuestoId);
+    return this.cuantificacion(presupuestoId, renglonId);
+  }
+
+  // --- Duplicar ------------------------------------------------------------
+
+  /**
+   * Copia completa de un presupuesto (catálogo, árbol y cuantificaciones) en el mismo proyecto,
+   * por ejemplo para pasar de venta a costo o de inicial a planificado. La copia empieza en borrador.
+   */
+  async duplicar(presupuestoId: string, datos: Partial<Pick<DatosPresupuesto, 'nombre' | 'tipo' | 'etapa' | 'proyectoId'>>, usuarioId: string) {
+    const origen = await this.catalogo.presupuesto(presupuestoId);
+    if (datos.proyectoId) await this.proyectos.obtener(datos.proyectoId);
+    return this.db.transaction(async (tx) => {
+      const [copia] = await tx
+        .insert(presupuestos)
+        .values({
+          proyectoId: datos.proyectoId ?? origen.proyectoId,
+          nombre: datos.nombre ?? `${origen.nombre} (copia)`,
+          tipo: datos.tipo ?? origen.tipo,
+          etapa: datos.etapa ?? origen.etapa,
+          monedaBase: origen.monedaBase,
+          origen: origen.origen,
+          creadoPor: usuarioId,
+        })
+        .returning();
+
+      const ins = await tx.select().from(insumos).where(eq(insumos.presupuestoId, presupuestoId));
+      await porLotes(ins, (lote) => tx.insert(insumos).values(lote.map(({ id: _, ...i }) => ({ ...i, presupuestoId: copia.id }))));
+
+      const mats = await tx.select().from(matrices).where(eq(matrices.presupuestoId, presupuestoId));
+      const idMatriz = new Map(mats.map((m) => [m.id, randomUUID()]));
+      await porLotes(mats, (lote) => tx.insert(matrices).values(lote.map((m) => ({ ...m, id: idMatriz.get(m.id)!, presupuestoId: copia.id }))));
+      const rms = (
+        await tx.select().from(matrizRenglones).innerJoin(matrices, eq(matrices.id, matrizRenglones.matrizId)).where(eq(matrices.presupuestoId, presupuestoId))
+      ).map((f) => f.matriz_renglones);
+      await porLotes(rms, (lote) => tx.insert(matrizRenglones).values(lote.map(({ id: _, ...r }) => ({ ...r, matrizId: idMatriz.get(r.matrizId)! }))));
+
+      // El árbol se inserta por nivel para que cada padre exista antes que sus hijos.
+      const arbol = await tx.select().from(presupuestoRenglones).where(eq(presupuestoRenglones.presupuestoId, presupuestoId));
+      const idRenglon = new Map(arbol.map((r) => [r.id, randomUUID()]));
+      const padreDe = new Map(arbol.map((r) => [r.id, r.padreId]));
+      const nivel = (id: string | null): number => (id ? 1 + nivel(padreDe.get(id) ?? null) : 0);
+      const ordenados = [...arbol].sort((a, b) => nivel(a.id) - nivel(b.id));
+      await porLotes(ordenados, (lote) =>
+        tx.insert(presupuestoRenglones).values(
+          lote.map((r) => ({
+            ...r,
+            id: idRenglon.get(r.id)!,
+            presupuestoId: copia.id,
+            padreId: r.padreId ? idRenglon.get(r.padreId)! : null,
+            matrizId: r.matrizId ? idMatriz.get(r.matrizId)! : null,
+          })),
+        ),
+      );
+      const cuants = (
+        await tx
+          .select()
+          .from(cuantificaciones)
+          .innerJoin(presupuestoRenglones, eq(presupuestoRenglones.id, cuantificaciones.renglonId))
+          .where(eq(presupuestoRenglones.presupuestoId, presupuestoId))
+      ).map((f) => f.cuantificaciones);
+      await porLotes(cuants, (lote) => tx.insert(cuantificaciones).values(lote.map(({ id: _, ...c }) => ({ ...c, renglonId: idRenglon.get(c.renglonId)! }))));
+      return copia;
+    });
   }
 }

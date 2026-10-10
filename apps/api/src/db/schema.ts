@@ -35,11 +35,39 @@ export const tipoRenglonEnum = pgEnum('tipo_renglon', ['partida', 'concepto']);
 
 const dinero = (nombre: string) => numeric(nombre, { precision: 20, scale: 6 });
 
+// Un proyecto agrupa varios presupuestos: el de venta y el de costo, el inicial y el planificado, etc.
+export const TIPOS_PROYECTO = ['obra', 'centro_costos'] as const;
+export const TIPOS_PRESUPUESTO = ['venta', 'costo'] as const;
+export const ETAPAS_PRESUPUESTO = ['inicial', 'planificado'] as const;
+export const ESTADOS_PRESUPUESTO = ['borrador', 'autorizado', 'congelado'] as const;
+export const tipoProyectoEnum = pgEnum('tipo_proyecto', TIPOS_PROYECTO);
+export const tipoPresupuestoEnum = pgEnum('tipo_presupuesto', TIPOS_PRESUPUESTO);
+export const etapaPresupuestoEnum = pgEnum('etapa_presupuesto', ETAPAS_PRESUPUESTO);
+export const estadoPresupuestoEnum = pgEnum('estado_presupuesto', ESTADOS_PRESUPUESTO);
+
+export const proyectos = pgTable(
+  'proyectos',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    nombre: text('nombre').notNull(),
+    tipo: tipoProyectoEnum('tipo').notNull().default('obra'),
+    cliente: text('cliente'),
+    ubicacion: text('ubicacion'),
+    creadoEn: timestamp('creado_en', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [uniqueIndex('proyectos_nombre_unico').on(sql`lower(${t.nombre})`)],
+);
+
 export const presupuestos = pgTable('presupuestos', {
   id: uuid('id').primaryKey().defaultRandom(),
+  proyectoId: uuid('proyecto_id')
+    .notNull()
+    .references(() => proyectos.id, { onDelete: 'restrict' }),
   nombre: text('nombre').notNull(),
-  cliente: text('cliente'),
-  ubicacion: text('ubicacion'),
+  tipo: tipoPresupuestoEnum('tipo').notNull().default('venta'),
+  etapa: etapaPresupuestoEnum('etapa').notNull().default('inicial'),
+  /** Congelado = solo lectura. Autorizado marca la versión aprobada por el cliente y se puede seguir ajustando. */
+  estado: estadoPresupuestoEnum('estado').notNull().default('borrador'),
   monedaBase: text('moneda_base').notNull().default('MXN'),
   origen: text('origen'),
   creadoPor: uuid('creado_por').references(() => usuarios.id),
@@ -116,6 +144,29 @@ export const presupuestoRenglones = pgTable(
     cantidad: numeric('cantidad', { precision: 20, scale: 6 }),
   },
   (t) => [index('presupuesto_renglones_arbol').on(t.presupuestoId, t.padreId, t.orden)],
+);
+
+/**
+ * Cuantificación (generador) de un concepto. Cuando un concepto tiene renglones aquí, su cantidad
+ * es la suma de sus resultados y se recalcula al guardarlos.
+ */
+export const cuantificaciones = pgTable(
+  'cuantificaciones',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    renglonId: uuid('renglon_id')
+      .notNull()
+      .references(() => presupuestoRenglones.id, { onDelete: 'cascade' }),
+    orden: integer('orden').notNull(),
+    descripcion: text('descripcion').notNull().default(''),
+    eje: text('eje').notNull().default(''),
+    piezas: numeric('piezas', { precision: 20, scale: 6 }),
+    largo: numeric('largo', { precision: 20, scale: 6 }),
+    ancho: numeric('ancho', { precision: 20, scale: 6 }),
+    alto: numeric('alto', { precision: 20, scale: 6 }),
+    formula: text('formula').notNull().default(''),
+  },
+  (t) => [index('cuantificaciones_renglon').on(t.renglonId, t.orden)],
 );
 
 /** Bitácora de cambios: quién hizo qué y cuándo. Se llena sola con cada petición que modifica datos. */

@@ -7,13 +7,21 @@ import { DetallePresupuesto, Insumo, MatrizResumen } from '../../lib/presupuesto
 
 export const useIdPresupuesto = () => useParams<{ id: string }>().id!;
 
-export const usePuedeEditar = () => useAuth().usuario?.rol !== 'consulta';
+/** Puede modificar el presupuesto abierto: no es de solo consulta y el presupuesto no está congelado. */
+export const usePuedeEditar = () => {
+  const rol = useAuth().usuario?.rol;
+  const estado = useDetalle(useIdPresupuesto()).data?.presupuesto.estado;
+  return rol !== 'consulta' && estado !== 'congelado';
+};
+
+export const useEsEditor = () => useAuth().usuario?.rol !== 'consulta';
 
 export const clavesPresupuesto = {
   detalle: (id: string) => ['presupuesto', id] as const,
   insumos: (id: string) => ['presupuesto', id, 'insumos'] as const,
   matrices: (id: string) => ['presupuesto', id, 'matrices'] as const,
   matriz: (id: string, mid: string) => ['presupuesto', id, 'matrices', mid] as const,
+  cuantificacion: (id: string, rid: string) => ['presupuesto', id, 'cuantificacion', rid] as const,
 };
 
 export const useDetalle = (id: string) => useQuery({ queryKey: clavesPresupuesto.detalle(id), queryFn: () => api<DetallePresupuesto>(`/presupuestos/${id}`) });

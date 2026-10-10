@@ -1,21 +1,21 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { randomUUID } from 'node:crypto';
 import { DB, Db } from '../db/db.module';
+import { porLotes } from '../db/lotes';
 import { insumos, matrices, matrizRenglones, presupuestoRenglones, presupuestos } from '../db/schema';
+import { ProyectosService } from '../presupuestos/proyectos.service';
 import { interpretarNeodata, PresupuestoImportado } from './neodata';
 import { ErrorDeArchivo } from './xlsx';
 
-const LOTE = 1000;
-
-async function porLotes<T>(filas: T[], insertar: (lote: T[]) => Promise<unknown>) {
-  for (let i = 0; i < filas.length; i += LOTE) await insertar(filas.slice(i, i + LOTE));
-}
-
 @Injectable()
 export class ImportarService {
-  constructor(@Inject(DB) private readonly db: Db) {}
+  constructor(
+    @Inject(DB) private readonly db: Db,
+    private readonly proyectos: ProyectosService,
+  ) {}
 
-  async neodata(contenido: Uint8Array, usuarioId: string, nombre?: string) {
+  /** Importa a un proyecto existente (`proyectoId`) o a uno nuevo nombrado como la obra del archivo. */
+  async neodata(contenido: Uint8Array, usuarioId: string, opciones: { nombre?: string; proyectoId?: string } = {}) {
     let datos: PresupuestoImportado;
     try {
       datos = interpretarNeodata(contenido);
@@ -23,17 +23,17 @@ export class ImportarService {
       if (e instanceof ErrorDeArchivo) throw new BadRequestException(e.message);
       throw e;
     }
-    const id = await this.guardar({ ...datos, nombre: nombre?.trim() || datos.nombre }, 'Neodata', usuarioId);
+    const id = await this.guardar({ ...datos, nombre: opciones.nombre?.trim() || datos.nombre }, 'Neodata', usuarioId, opciones.proyectoId);
     return { id, advertencias: datos.advertencias, totalOrigen: datos.totalOrigen };
   }
 
   /** Guarda un presupuesto importado en una sola transacción. */
-  private async guardar(datos: PresupuestoImportado, origen: string, usuarioId: string): Promise<string> {
+  private async guardar(datos: PresupuestoImportado, origen: string, usuarioId: string, proyectoId?: string): Promise<string> {
     return this.db.transaction(async (tx) => {
-      const [p] = await tx
-        .insert(presupuestos)
-        .values({ nombre: datos.nombre, cliente: datos.cliente, ubicacion: datos.ubicacion, origen, creadoPor: usuarioId })
-        .returning();
+      const proyecto = proyectoId
+        ? await this.proyectos.obtener(proyectoId, tx)
+        : await this.proyectos.buscarOCrear({ nombre: datos.nombre, cliente: datos.cliente, ubicacion: datos.ubicacion }, tx);
+      const [p] = await tx.insert(presupuestos).values({ proyectoId: proyecto.id, nombre: datos.nombre, origen, creadoPor: usuarioId }).returning();
 
       await porLotes(datos.insumos, (lote) => tx.insert(insumos).values(lote.map((i) => ({ ...i, presupuestoId: p.id }))));
 

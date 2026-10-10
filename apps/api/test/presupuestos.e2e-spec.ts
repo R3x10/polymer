@@ -36,7 +36,7 @@ describe('Presupuestos (e2e)', () => {
   const api = () => request(app.getHttpServer());
 
   it('captura un presupuesto desde cero y lo calcula al centavo', async () => {
-    const p = (await api().post('/api/presupuestos').set(admin).send({ nombre: 'Casa', cliente: 'Juan' }).expect(201)).body;
+    const p = (await api().post('/api/presupuestos').set(admin).send({ nombre: 'Venta', proyecto: 'Casa' }).expect(201)).body;
     const base = `/api/presupuestos/${p.id}`;
 
     for (const ins of [
@@ -135,7 +135,8 @@ describe('Presupuestos (e2e)', () => {
     expect(res.body).toMatchObject({ totalOrigen: '23331.21', advertencias: [] });
 
     const det = (await api().get(`/api/presupuestos/${res.body.id}`).set(admin).expect(200)).body;
-    expect(det.presupuesto).toMatchObject({ nombre: 'Casa Prueba', ubicacion: 'Querétaro', origen: 'Neodata' });
+    expect(det.presupuesto).toMatchObject({ nombre: 'Casa Prueba', origen: 'Neodata', tipo: 'venta', etapa: 'inicial', estado: 'borrador' });
+    expect(det.proyecto).toMatchObject({ nombre: 'Casa Prueba', ubicacion: 'Querétaro' });
     expect(det.total).toEqual({ MXN: '23331.21' });
     expect(det.renglones.map((r: { tipo: string; clave: string }) => `${r.tipo}:${r.clave}`)).toEqual(['partida:A', 'partida:01', 'concepto:MURO']);
 
@@ -146,9 +147,97 @@ describe('Presupuestos (e2e)', () => {
     await api().post('/api/presupuestos/importar/neodata').set(admin).attach('archivo', Buffer.from('no es excel'), 'x.xlsx').expect(400);
   });
 
-  it('borra un presupuesto con todo su contenido', async () => {
+  /** Presupuesto mínimo: un concepto MURO de $100.00 por unidad dentro de una partida. */
+  async function presupuestoSencillo(proyecto: string) {
+    const p = (await api().post('/api/presupuestos').set(admin).send({ nombre: 'Venta', proyecto }).expect(201)).body;
+    const base = `/api/presupuestos/${p.id}`;
+    await api().post(`${base}/insumos`).set(admin).send({ clave: 'BLOCK', tipo: 'material', costo: '10' }).expect(201);
+    const partida = (await api().post(`${base}/renglones`).set(admin).send({ tipo: 'partida', clave: '01', descripcion: 'Muros' }).expect(201)).body;
+    const concepto = (
+      await api().post(`${base}/renglones`).set(admin).send({ tipo: 'concepto', padreId: partida.id, cantidad: '1', nueva: { clave: 'MURO', descripcion: 'Muro', unidad: 'm2' } }).expect(201)
+    ).body;
+    await api().put(`${base}/matrices/${concepto.matrizId}/renglones`).set(admin).send({ renglones: [{ componente: 'BLOCK', cantidad: '10' }] }).expect(200);
+    return { p, base, concepto };
+  }
+
+  it('calcula la cantidad de un concepto con su cuantificación', async () => {
+    const { base, concepto } = await presupuestoSencillo('Bodega');
+    const url = `${base}/renglones/${concepto.id}/cuantificacion`;
+    const c = (
+      await api()
+        .put(url)
+        .set(admin)
+        .send({
+          renglones: [
+            { descripcion: 'Muro eje 1', eje: '1/A-C', piezas: '2', largo: '5.25', alto: '2.40' }, // 25.2
+            { descripcion: 'Vano puerta', piezas: '-1', largo: '0.9', alto: '2.1' }, // -1.89
+            { descripcion: 'Pretil', eje: 'A', largo: '12', alto: '0.6', formula: '(L+0.3)*H' }, // 7.38
+          ],
+        })
+        .expect(200)
+    ).body;
+    expect(c.renglones.map((r: { resultado: string }) => r.resultado)).toEqual(['25.200000', '-1.890000', '7.380000']);
+    expect(c.total).toBe('30.690000');
+
+    const det = (await api().get(base).set(admin)).body;
+    expect(det.renglones.find((r: { id: string }) => r.id === concepto.id)).toMatchObject({ cantidad: '30.690000', cuantificado: true, importe: { MXN: '3069.00' } });
+    expect(det.total).toEqual({ MXN: '3069.00' });
+
+    // Con cuantificación la cantidad no se captura a mano; una fórmula inválida no se guarda.
+    await api().patch(`${base}/renglones/${concepto.id}`).set(admin).send({ cantidad: '5' }).expect(400);
+    await api().put(url).set(admin).send({ renglones: [{ formula: '2*(3' }] }).expect(400);
+    expect((await api().get(url).set(consulta).expect(200)).body.total).toBe('30.690000');
+
+    // Sin renglones vuelve a capturarse a mano y conserva la última cantidad.
+    await api().put(url).set(admin).send({ renglones: [] }).expect(200);
+    await api().patch(`${base}/renglones/${concepto.id}`).set(admin).send({ cantidad: '5' }).expect(200);
+    expect((await api().get(base).set(admin)).body.total).toEqual({ MXN: '500.00' });
+  });
+
+  it('agrupa presupuestos por proyecto, los duplica y los congela', async () => {
+    const { p, base, concepto } = await presupuestoSencillo('Torre');
+    await api()
+      .put(`${base}/renglones/${concepto.id}/cuantificacion`)
+      .set(admin)
+      .send({ renglones: [{ piezas: '3' }] })
+      .expect(200);
+
+    // Copia de costo en el mismo proyecto: independiente del original, con cuantificación incluida.
+    const costo = (await api().post(`${base}/duplicar`).set(admin).send({ nombre: 'Costo', tipo: 'costo' }).expect(201)).body;
+    expect(costo).toMatchObject({ proyectoId: p.proyectoId, tipo: 'costo', etapa: 'inicial', estado: 'borrador' });
+    const baseCosto = `/api/presupuestos/${costo.id}`;
+    const detCosto = (await api().get(baseCosto).set(admin)).body;
+    expect(detCosto.total).toEqual({ MXN: '300.00' });
+    const conceptoCopia = detCosto.renglones.find((r: { tipo: string }) => r.tipo === 'concepto');
+    expect(conceptoCopia).toMatchObject({ clave: 'MURO', cuantificado: true });
+    const block = (await api().get(`${baseCosto}/insumos`).set(admin)).body[0];
+    await api().patch(`${baseCosto}/insumos/${block.id}`).set(admin).send({ costo: '8' }).expect(200);
+    expect((await api().get(baseCosto).set(admin)).body.total).toEqual({ MXN: '240.00' });
+    expect((await api().get(base).set(admin)).body.total).toEqual({ MXN: '300.00' });
+
+    const proyectos = (await api().get('/api/proyectos').set(consulta).expect(200)).body;
+    expect(proyectos.find((x: { nombre: string }) => x.nombre === 'Torre')).toMatchObject({ tipo: 'obra', presupuestos: 2 });
+    await api().delete(`/api/proyectos/${p.proyectoId}`).set(admin).expect(409);
+    const lista = (await api().get('/api/presupuestos').set(admin)).body;
+    expect(lista.find((x: { id: string }) => x.id === costo.id)).toMatchObject({ proyecto: 'Torre', tipo: 'costo', conceptos: 1 });
+
+    // Congelado: no se modifica nada hasta cambiarle el estado.
+    await api().patch(base).set(admin).send({ estado: 'congelado' }).expect(200);
+    await api().patch(`${base}/renglones/${concepto.id}`).set(admin).send({ descripcion: 'Otro' }).expect(409);
+    await api().post(`${base}/insumos`).set(admin).send({ clave: 'X', tipo: 'material' }).expect(409);
+    await api().put(`${base}/matrices/${concepto.matrizId}/renglones`).set(admin).send({ renglones: [] }).expect(409);
+    await api().put(`${base}/renglones/${concepto.id}/cuantificacion`).set(admin).send({ renglones: [] }).expect(409);
+    await api().patch(base).set(admin).send({ nombre: 'Otro' }).expect(409);
+    await api().delete(base).set(admin).expect(409);
+    await api().post(`${base}/duplicar`).set(admin).send({ etapa: 'planificado' }).expect(201);
+    await api().patch(base).set(admin).send({ estado: 'autorizado' }).expect(200);
+    await api().patch(`${base}/renglones/${concepto.id}`).set(admin).send({ descripcion: 'Otro' }).expect(200);
+  });
+
+  it('borra presupuestos con todo su contenido y luego sus proyectos', async () => {
     const lista = (await api().get('/api/presupuestos').set(admin)).body;
     for (const p of lista) await api().delete(`/api/presupuestos/${p.id}`).set(admin).expect(204);
     expect((await api().get('/api/presupuestos').set(admin)).body).toEqual([]);
+    for (const p of (await api().get('/api/proyectos').set(admin)).body) await api().delete(`/api/proyectos/${p.id}`).set(admin).expect(204);
   });
 });

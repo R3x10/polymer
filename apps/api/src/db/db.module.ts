@@ -40,3 +40,6 @@ export class DbModule implements OnApplicationShutdown {
     await this.pool.end();
   }
 }
+
+/** Transacción de Drizzle: los servicios aceptan `Db | Tx` cuando pueden correr dentro de una. */
+export type Tx = Parameters<Parameters<Db['transaction']>[0]>[0];

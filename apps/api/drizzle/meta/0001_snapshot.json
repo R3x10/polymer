@@ -1,5 +1,5 @@
 {
-  "id": "bd6e36db-0def-4abf-bc3f-8665b7015182",
+  "id": "a2e8d822-2885-4e31-b094-9de68a1e9197",
   "prevId": "24a944f2-d9e1-46e0-902f-546cae5761de",
   "version": "7",
   "dialect": "postgresql",
@@ -82,6 +82,119 @@
             "id"
           ],
           "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.cuantificaciones": {
+      "name": "cuantificaciones",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "renglon_id": {
+          "name": "renglon_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "orden": {
+          "name": "orden",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "descripcion": {
+          "name": "descripcion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "eje": {
+          "name": "eje",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "piezas": {
+          "name": "piezas",
+          "type": "numeric(20, 6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "largo": {
+          "name": "largo",
+          "type": "numeric(20, 6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ancho": {
+          "name": "ancho",
+          "type": "numeric(20, 6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "alto": {
+          "name": "alto",
+          "type": "numeric(20, 6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "formula": {
+          "name": "formula",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        }
+      },
+      "indexes": {
+        "cuantificaciones_renglon": {
+          "name": "cuantificaciones_renglon",
+          "columns": [
+            {
+              "expression": "renglon_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "orden",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "cuantificaciones_renglon_id_presupuesto_renglones_id_fk": {
+          "name": "cuantificaciones_renglon_id_presupuesto_renglones_id_fk",
+          "tableFrom": "cuantificaciones",
+          "tableTo": "presupuesto_renglones",
+          "columnsFrom": [
+            "renglon_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -540,23 +653,41 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
+        "proyecto_id": {
+          "name": "proyecto_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
         "nombre": {
           "name": "nombre",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "cliente": {
-          "name": "cliente",
-          "type": "text",
+        "tipo": {
+          "name": "tipo",
+          "type": "tipo_presupuesto",
+          "typeSchema": "public",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "'venta'"
         },
-        "ubicacion": {
-          "name": "ubicacion",
-          "type": "text",
+        "etapa": {
+          "name": "etapa",
+          "type": "etapa_presupuesto",
+          "typeSchema": "public",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "'inicial'"
+        },
+        "estado": {
+          "name": "estado",
+          "type": "estado_presupuesto",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'borrador'"
         },
         "moneda_base": {
           "name": "moneda_base",
@@ -594,6 +725,19 @@
       },
       "indexes": {},
       "foreignKeys": {
+        "presupuestos_proyecto_id_proyectos_id_fk": {
+          "name": "presupuestos_proyecto_id_proyectos_id_fk",
+          "tableFrom": "presupuestos",
+          "tableTo": "proyectos",
+          "columnsFrom": [
+            "proyecto_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
         "presupuestos_creado_por_usuarios_id_fk": {
           "name": "presupuestos_creado_por_usuarios_id_fk",
           "tableFrom": "presupuestos",
@@ -608,6 +752,75 @@
           "onUpdate": "no action"
         }
       },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.proyectos": {
+      "name": "proyectos",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "nombre": {
+          "name": "nombre",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tipo": {
+          "name": "tipo",
+          "type": "tipo_proyecto",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'obra'"
+        },
+        "cliente": {
+          "name": "cliente",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ubicacion": {
+          "name": "ubicacion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "creado_en": {
+          "name": "creado_en",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "proyectos_nombre_unico": {
+          "name": "proyectos_nombre_unico",
+          "columns": [
+            {
+              "expression": "lower(\"nombre\")",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -699,6 +912,23 @@
     }
   },
   "enums": {
+    "public.estado_presupuesto": {
+      "name": "estado_presupuesto",
+      "schema": "public",
+      "values": [
+        "borrador",
+        "autorizado",
+        "congelado"
+      ]
+    },
+    "public.etapa_presupuesto": {
+      "name": "etapa_presupuesto",
+      "schema": "public",
+      "values": [
+        "inicial",
+        "planificado"
+      ]
+    },
     "public.rol": {
       "name": "rol",
       "schema": "public",
@@ -734,6 +964,22 @@
         "subcontrato",
         "flete",
         "otro"
+      ]
+    },
+    "public.tipo_presupuesto": {
+      "name": "tipo_presupuesto",
+      "schema": "public",
+      "values": [
+        "venta",
+        "costo"
+      ]
+    },
+    "public.tipo_proyecto": {
+      "name": "tipo_proyecto",
+      "schema": "public",
+      "values": [
+        "obra",
+        "centro_costos"
       ]
     },
     "public.tipo_renglon": {

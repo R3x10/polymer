@@ -221,6 +221,8 @@ button.icono:hover { color: var(--texto); background: var(--hover); }
 .badge.rosa { background: var(--b-rosa); color: var(--t-rosa); }
 .badge.con-punto.verde .punto { background: var(--t-verde); }
 .badge.con-punto.rojo .punto { background: var(--t-rojo); }
+.badge.con-punto.azul .punto { background: var(--t-azul); }
+.badge.con-punto.gris .punto { background: var(--tenue); }
 
 /* Edición en su lugar */
 input.en-linea { padding: 0.2rem 0.35rem; border-color: transparent; background: transparent; width: 100%; min-width: 3rem; border-radius: 4px; }
@@ -233,3 +235,17 @@ input.en-linea:focus { border-color: var(--acento); background: var(--superficie
 .tabla td.descripcion { max-width: 28rem; }
 .tabla.arbol td.descripcion { max-width: 24rem; }
 .tabla.arbol td.descripcion { max-width: 22rem; }
+
+/* Encabezado del presupuesto: tipo, etapa y estado */
+.etiquetas { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin-top: 0.35rem; }
+select.estado { padding: 0.1rem 0.5rem; border-radius: 999px; font-size: 0.8rem; font-weight: 500; border: 0; background: var(--b-gris); color: var(--texto); }
+select.estado.autorizado { background: var(--b-verde); color: var(--t-verde); }
+select.estado.congelado { background: var(--b-azul); color: var(--t-azul); }
+.aviso svg { vertical-align: -2px; }
+
+/* Cuantificación abierta debajo de su concepto */
+button.icono.activo { color: var(--acento); }
+.tabla tr.detalle > td { background: var(--fondo-suave, var(--hover)); padding: 0.5rem 0.75rem 0.75rem; white-space: normal; }
+.tabla tr.detalle:hover > td { background: var(--fondo-suave, var(--hover)); }
+.cuantificacion { border: 1px solid var(--borde); border-radius: 10px; background: var(--superficie); padding: 0.25rem 0.75rem; }
+.cuantificacion .tabla { width: 100%; }

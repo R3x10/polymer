@@ -19,7 +19,9 @@ Hay un instalador `.exe` para Windows 10/11 que trae todo (API, interfaz y Postg
 
 ## Presupuestos
 
+- Proyectos (obra o centro de costos) con varios presupuestos cada uno: tipo venta o costo, etapa inicial o planificado y estado borrador, autorizado o congelado (solo lectura). Un presupuesto se puede duplicar completo para pasar de venta a costo o de inicial a planificado.
 - Captura desde cero: partidas, conceptos, análisis de precio unitario (matrices) e insumos, con recálculo inmediato al centavo.
+- Cuantificación (generador) por concepto: renglones con descripción, eje o tramo, piezas, largo, ancho, alto y fórmula opcional (`P`, `L`, `A`, `H`); su suma es la cantidad del concepto.
 - Importación del archivo de intercambio de Neodata (`Xn_Presupuesto.xlsx` o el `.zip` que lo contiene); al terminar se compara el costo directo con el de Neodata.
 - Varios conceptos pueden usar la misma matriz con clave y descripción propias.
 - Bitácora de cambios por usuario (solo administradores).
