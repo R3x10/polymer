@@ -57,6 +57,9 @@ add_apt_repo() { # nombre, url de la llave, línea deb
 }
 
 msg "Instalando paquetes del sistema"
+# Caddy viene de los repositorios de Debian: el repositorio de Cloudsmith dejó de servir
+# (402 Payment Required) y, si quedó de una instalación anterior, rompe apt-get update.
+rm -f /etc/apt/sources.list.d/caddy.list /etc/apt/keyrings/caddy.gpg
 apt-get update -qq
 apt-get install -y -qq --no-install-recommends ca-certificates curl gnupg git >/dev/null
 install -d -m 0755 /etc/apt/keyrings
@@ -64,8 +67,6 @@ add_apt_repo nodesource https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.ke
   "https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main"
 add_apt_repo pgdg https://www.postgresql.org/media/keys/ACCC4CF8.asc \
   "https://apt.postgresql.org/pub/repos/apt $CODENAME-pgdg main"
-add_apt_repo caddy https://dl.cloudsmith.io/public/caddy/stable/gpg.key \
-  "https://dl.cloudsmith.io/public/caddy/stable/deb/debian any-version main"
 apt-get update -qq
 apt-get install -y -qq --no-install-recommends nodejs "postgresql-$PG_MAJOR" caddy >/dev/null
 systemctl enable --now postgresql >/dev/null
